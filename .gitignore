@@ -1,0 +1,37 @@
+# Betriebssystem und lokale Editoren
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
+
+# Lokale Konfiguration, Zugangsdaten und Agenten-Laufzeit
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+.codex/
+.agents/
+.aws/
+
+# Eventuelle Entwicklungswerkzeuge und generierte Ergebnisse
+node_modules/
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.cache/
+coverage/
+dist/
+build/
+test-results/
+playwright-report/
+.preview/
+*.log
+*.tmp
+
+# Website-Quellen, lokale Bilder und Dokumentation werden bewusst versioniert.
