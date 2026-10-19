@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Eine digitale Expedition in die Antarktis. Entdecke Landschaften aus Eis, eine faszinierende Tierwelt und den südlichsten Kontinent unserer Erde.">
+  <meta name="theme-color" content="#102f3d">
+  <title>Antarktis — Am Ende der Welt. Am Anfang des Staunens.</title>
+  <link rel="icon" href="frontend/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <script src="scripts.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#inhalt">Zum Inhalt springen</a>
+
+  <!-- Navigation bleibt ohne JavaScript vollständig zugänglich. -->
+  <header class="site-header">
+    <a class="brand" href="#start" aria-label="Antarktis – Startseite">
+      <svg class="brand-icon" viewBox="0 0 42 32" fill="none" aria-hidden="true">
+        <path d="M2 29 16 4l8 14 5-8 11 19H2Z" stroke="currentColor" stroke-width="1.8"/>
+        <path d="m10 15 6 3 5-5M24 18l5 4 5-3" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+      ANTARKTIS<span class="brand-dot">.</span>
+    </a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-navigation" hidden>
+      Menü <span aria-hidden="true">☰</span>
+    </button>
+    <nav id="main-navigation" class="navigation" aria-label="Hauptnavigation">
+      <a href="#start" aria-current="location">Entdecken</a>
+      <a href="#landschaften">Landschaften</a>
+      <a href="#tierwelt">Tierwelt</a>
+      <a href="#wissen">Wissen</a>
+    </nav>
+    <span class="header-coordinate" aria-label="90 Grad südlicher Breite">
+      90° S <span aria-hidden="true">↗</span>
+    </span>
+  </header>
+
+  <main id="inhalt">
+    <section class="hero" id="start" aria-labelledby="hero-title">
+      <img class="hero-image" src="frontend/bilder_landschaft/hero-antarktis.jpg"
+        alt="Blauer Eisberg vor schneebedeckten Bergen im antarktischen Meer"
+        width="2400" height="1350" fetchpriority="high">
+      <div class="hero-shade"></div>
+      <div class="hero-content page-width">
+        <p class="eyebrow"><span class="tiny-line"></span> Eine Reise zum südlichsten Kontinent</p>
+        <h1 id="hero-title">Fern von allem.<br><em>Näher am Staunen.</em></h1>
+        <p class="hero-description">Wo Eis zu Landschaft wird und Stille eine neue<br class="desktop-break"> Dimension bekommt. Willkommen in der Antarktis.</p>
+        <a class="button button-light" href="#landschaften">
+          Die Antarktis entdecken <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+      <div class="hero-bottom page-width">
+        <span><span class="status-dot"></span> DER WEISSE KONTINENT</span>
+        <a href="#ueberblick">Weiter nach Süden <span aria-hidden="true">↓</span></a>
+        <span class="hero-edition">FELDNOTIZEN / 01</span>
+      </div>
+    </section>
+
+    <!-- Fakten und Quellen: gerundete Werte; weiterführende Belege im Quellenbereich. -->
+    <section class="intro page-width" id="ueberblick" aria-labelledby="intro-title">
+      <div class="intro-copy">
+        <p class="eyebrow section-label">01 / EIN ORT WIE KEIN ANDERER</p>
+        <h2 id="intro-title">Eine Welt aus Eis.<br>Und voller Leben.</h2>
+      </div>
+      <div class="intro-detail">
+        <p>Am südlichen Ende unserer Erde liegt ein Kontinent der Extreme. Gewaltige Gletscher, tiefblaues Meer und Tiere, die in dieser besonderen Welt zu Hause sind.</p>
+        <p>Entdecke eine Landschaft, die uns zeigt, wie faszinierend unser Planet ist.</p>
+      </div>
+      <dl class="facts">
+        <div>
+          <dt>Fläche des Kontinents</dt>
+          <dd>14 Mio.<span>km²</span></dd>
+        </div>
+        <div>
+          <dt>Von Eis bedeckt</dt>
+          <dd>98<span>%</span></dd>
+        </div>
+        <div>
+          <dt>Gemessener Kälterekord</dt>
+          <dd>−89,2<span>°C</span></dd>
+        </div>
+        <div class="fact-note">
+          <dt>Ein Kontinent der Extreme</dt>
+          <dd>Kältester. Trockenster.<br>Windigster.</dd>
+        </div>
+      </dl>
+    </section>
+
+    <section class="landscapes section-space" id="landschaften" aria-labelledby="landscapes-title">
+      <div class="page-width">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow section-label">02 / LANDSCHAFTEN</p>
+            <h2 id="landscapes-title">Die vielen Formen der Stille.</h2>
+          </div>
+          <p>Zwischen schroffen Gipfeln und schwimmenden<br class="desktop-break"> Eisriesen schreibt die Natur ihre eigenen Geschichten.</p>
+        </div>
+        <div class="landscape-grid">
+          <article class="landscape-feature">
+            <img src="frontend/bilder_landschaft/eisberge.jpg"
+              alt="Blauer Eisberg vor einer schneebedeckten antarktischen Bergwand"
+              width="1800" height="1200" loading="lazy">
+            <div class="image-caption">
+              <span class="eyebrow">EIS & OZEAN</span>
+              <h3>Eine Landschaft in Bewegung.</h3>
+              <p>Eisberge lösen sich von Gletschern oder Schelfeis und treiben mit Wind und Meeresströmungen weiter.</p>
+            </div>
+            <span class="photo-index" aria-hidden="true">01 — 02</span>
+          </article>
+          <article class="landscape-note">
+            <span class="line-art" aria-hidden="true">△</span>
+            <p class="eyebrow">FELS & EWIGES EIS</p>
+            <h3>Unter dem Weiß:<br>ein ganzer Kontinent.</h3>
+            <p>Antarktika ist festes Land unter einem gewaltigen Eisschild. An manchen Stellen ragen Bergspitzen aus dem Eis. Diese Felsinseln werden Nunataks genannt.</p>
+            <a class="text-link" href="#wissen">
+              Den Kontinent verstehen <span aria-hidden="true">↗</span>
+            </a>
+            <span class="note-coordinate">LAND · EIS · MEER</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="wildlife page-width section-space" id="tierwelt" aria-labelledby="wildlife-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow section-label">03 / TIERWELT</p>
+          <h2 id="wildlife-title">Hier ist Leben zu Hause.</h2>
+        </div>
+        <p>Erstaunlich angepasst.<br>Untrennbar mit dem Meer verbunden.</p>
+      </div>
+      <!-- Filter werden erst mit JavaScript sichtbar; ohne JS sind alle Tiere lesbar. -->
+      <div class="animal-filters" role="group" aria-label="Tierwelt filtern" hidden>
+        <button type="button" data-filter="alle" aria-pressed="true">Alle entdecken <span>02</span></button>
+        <button type="button" data-filter="pinguine" aria-pressed="false">Pinguine</button>
+        <button type="button" data-filter="robben" aria-pressed="false">Robben</button>
+      </div>
+      <p class="sr-only" id="filter-status" role="status" aria-live="polite"></p>
+      <div class="animal-grid">
+        <article class="animal-card" data-category="pinguine">
+          <div class="animal-image-wrap">
+            <img src="frontend/bilder_tiere/pinguine.jpg"
+              alt="Zügelpinguine auf der Felsküste von Coronation Island"
+              width="3735" height="2801" loading="lazy">
+            <span class="image-tag">AN LAND & IM WASSER</span>
+          </div>
+          <div class="animal-description">
+            <span class="animal-number">01</span>
+            <div>
+              <h3>Pinguine</h3>
+              <p>An Land unverwechselbar, im Meer in ihrem Element: Ihre Flügel sind zu Flossen geworden. Das kalte Südpolarmeer liefert ihnen Nahrung.</p>
+            </div>
+          </div>
+        </article>
+        <article class="animal-card" data-category="robben">
+          <div class="animal-image-wrap">
+            <img src="frontend/bilder_tiere/robbe.jpg"
+              alt="Weddellrobbe schaut aus einem Atemloch im antarktischen Eis"
+              width="1816" height="1196" loading="lazy">
+            <span class="image-tag">ZWISCHEN EIS & MEER</span>
+          </div>
+          <div class="animal-description">
+            <span class="animal-number">02</span>
+            <div>
+              <h3>Robben</h3>
+              <p>Das Meer ist ihr Jagdrevier, das Eis ein Ruheplatz. Eine dicke Fettschicht hilft den Meeressäugern, ihre Körperwärme zu bewahren.</p>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="knowledge section-space" id="wissen" aria-labelledby="knowledge-title">
+      <div class="page-width knowledge-grid">
+        <div>
+          <p class="eyebrow section-label">04 / WISSEN & STAUNEN</p>
+          <h2 id="knowledge-title">Hinter dem Eis<br>steckt mehr.</h2>
+          <p class="knowledge-intro">Kleine Antworten auf große Fragen<br>rund um den weißen Kontinent.</p>
+          <div class="south-marker" aria-hidden="true">
+            <span>+</span>
+            <p>90°00′ S<br><small>DER SÜDPOL</small></p>
+          </div>
+        </div>
+        <div class="questions">
+          <details open>
+            <summary><span>01</span> Arktis oder Antarktis – was ist der Unterschied?</summary>
+            <p>Die Arktis liegt rund um den Nordpol und besteht im Zentrum aus einem von Land umgebenen Ozean. Am Südpol ist es umgekehrt: Der Kontinent Antarktika ist vom Südlichen Ozean umgeben. Die Antarktis umfasst auch die umliegende südpolare Region.</p>
+          </details>
+          <details>
+            <summary><span>02</span> Warum ist das Eis manchmal blau?</summary>
+            <p>Dichtes Eis absorbiert rotes Licht stärker als blaues. Wenn Licht einen längeren Weg durch das Eis zurücklegt, wird der blaue Farbton besonders sichtbar. Viele kleine Luftblasen lassen Schnee und Eis dagegen weiß erscheinen.</p>
+          </details>
+          <details>
+            <summary><span>03</span> Leben Menschen in der Antarktis?</summary>
+            <p>Es gibt keine dauerhaft ansässige Bevölkerung. Menschen leben und arbeiten zeitweise auf Forschungsstationen – im Sommer deutlich mehr als im Winter. Sie untersuchen unter anderem Eis, Klima und Ökosysteme.</p>
+          </details>
+          <details>
+            <summary><span>04</span> Warum ist dieser Kontinent für uns wichtig?</summary>
+            <p>Antarktisches Eis speichert einen großen Teil des Süßwassers der Erde. Eisbohrkerne bewahren Hinweise auf das Klima vergangener Zeiten. Und der Südliche Ozean spielt eine wichtige Rolle im weltweiten Austausch von Wärme und Wasser.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="closing page-width">
+      <p class="eyebrow section-label">WEIT WEG. UND DOCH EIN TEIL VON UNS.</p>
+      <h2>Ein besonderer Ort.<br>Ein gemeinsamer Planet.</h2>
+      <p>Wer die Antarktis kennenlernt, sieht die Erde mit anderen Augen.<br>Bleib neugierig.</p>
+      <a class="text-link" href="#start">Zurück zum Anfang <span aria-hidden="true">↑</span></a>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="page-width">
+      <div class="footer-top">
+        <a class="brand" href="#start">ANTARKTIS<span class="brand-dot">.</span></a>
+        <p>Eine digitale Expedition. Gemacht zum Entdecken.</p>
+        <a href="#quellen">Quellen & Bildnachweise ↓</a>
+      </div>
+      <details id="quellen" class="sources">
+        <summary>Quellen & Bildnachweise</summary>
+        <p>Diese Website funktioniert vollständig offline. Die folgenden weiterführenden Quellen benötigen eine Internetverbindung.</p>
+        <ul>
+          <li><a href="https://www.usap.gov/aboutthecontinent/">U.S. Antarctic Program – Kontinent, Fläche und Eisbedeckung</a></li>
+          <li><a href="https://www.bas.ac.uk/about/where-we-work/antarctica/">British Antarctic Survey – Landschaft, Eis und Forschung</a></li>
+          <li><a href="https://legacy.bas.ac.uk/about_antarctica/geography/weather/temperatures.php">British Antarctic Survey – Temperaturen und Kälterekord (Wostok, 1983)</a></li>
+          <li><a href="https://www.antarctica.gov.au/about-antarctica/animals/">Australian Antarctic Program – Tierwelt</a></li>
+          <li><a href="https://nsidc.org/learn/parts-cryosphere/glaciers/glacier-quick-facts">NSIDC – Warum Gletschereis blau ist</a></li>
+          <li><a href="docs/BILDQUELLEN.md">Lokale Bildnachweise mit Urhebern und Lizenzen</a></li>
+        </ul>
+        <h3>Bildnachweise</h3>
+        <ul>
+          <li>Titelbild: Derek Oyen, Unsplash-Lizenz.</li>
+          <li>Eisberg: James Eades, Unsplash-Lizenz.</li>
+          <li>Zügelpinguine: Morhua, CC0 1.0.</li>
+          <li>Weddellrobbe: Foto Giuseppe Zibordi; Credit Michael Van Woert, NOAA NESDIS, ORA; Public Domain gemäß NOAA-Freigabe.</li>
+        </ul>
+      </details>
+      <div class="footer-bottom">
+        <span>ENTDECKE DEN WEISSEN KONTINENT</span>
+        <span>Ein lokales Wissensprojekt · Ohne Tracking</span>
+        <span>90° S / ANTARKTIS</span>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
