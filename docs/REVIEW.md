@@ -66,3 +66,19 @@ Die folgenden Ergebnisse wurden vom Hauptagenten gemeldet und nicht durch den un
 - Der Versuch eines direkten `file://`-Aufrufs wurde von der Browser-URL-Richtlinie abgewiesen, die nur HTTP/S zulässt. Ein tatsächlicher `file://`-Lauf und ein Neuladen bei gesperrtem Netzwerk sind deshalb ausdrücklich nicht bestätigt.
 
 Der Code benötigt ausschließlich lokale Laufzeitressourcen. Die verbleibende Prüfgrenze betrifft die konkrete direkte Dateiöffnung in dieser Werkzeugumgebung, nicht eine bekannte externe Abhängigkeit der Website.
+
+## Ergänzung: Kompass und Breitengrade
+
+Am 19. Oktober 2026 wurde die isolierte Südpol-Markierung durch einen erklärenden Wissensabschnitt mit SVG-Kompassrose und einer Vergleichstabelle ersetzt. Ein kleiner SVG-Kompass ersetzt auch den dekorativen Pfeil neben der Koordinate im Header. Der Footer benennt 90° S jetzt ausdrücklich als Südpol.
+
+Der unabhängige Review-Agent hat HTML-Semantik, CSS, IDs, Anker, lokale Ressourcen, fehlende dekorative Nummerierungen und die geografischen Angaben anhand der verlinkten Primärquellen geprüft. Keine wesentlichen Befunde. Die SVGs sind dekorativ; sämtliche Informationen stehen als Text zur Verfügung. Die Tabelle enthält Spalten- und Zeilenüberschriften sowie eine Beschriftung und benötigt kein JavaScript.
+
+Zusätzliche Prüfung des Hauptagenten: Darstellung im lokalen HTTP-Prüfbrowser bei 1280 px sowie in Prüfansichten mit 320 und 768 px visuell kontrolliert. Desktop ohne horizontale Überbreite, alle fünf Ortszeilen im DOM; die schmalen Tabellen umbrechen innerhalb der Ansicht. `git diff --check` ohne Befund. Der direkte Datei-Aufruf wurde nicht erneut getestet; die zuvor dokumentierte Werkzeuggrenze bleibt bestehen. Die SVGs erzeugen keine externen Ladeabhängigkeiten.
+
+## Ergänzung: Tierwelt-Unterseite und Krill
+
+Am 20. Oktober 2026 abgeschlossen: „Feldnotizen“ entfernt, Krill mit lokalem Foto ergänzt und alle drei Tierkarten über jeweils einen gemeinsamen Bild- und Textlink mit `tierwelt.html` verbunden. Die Unterseite erläutert Lebensweise und ökologische Rolle von Zügelpinguinen, Weddellrobben und Antarktischem Krill. Eine vereinfachte Nahrungskette ergänzt die Texte. Die GitHub-Veröffentlichungsanleitung wurde auf Wunsch aus der README entfernt.
+
+Unabhängiger Abschlussreview: lokale Ressourcen und Anker vorhanden, IDs eindeutig, JavaScript-Syntax gültig, keine funktionalen Blocker. Ein veralteter README-Verweis in der Projektdokumentation und eine zusätzliche Leerzeile wurden anschließend korrigiert.
+
+Browserprüfung des Hauptagenten über lokalen HTTP-Server: alle vier Filter einschließlich Krill und Rücksetzen auf drei Karten funktionieren. Alle drei Karten führen zum passenden Tierabschnitt, der Rücklink führt zur Startseiten-Übersicht. Lokale Bilder geladen, Fehlerkonsole leer. Desktop-Darstellung und schmale Mobilansicht visuell geprüft; mobiles Menü öffnet sich. Bei 320 und 768 px keine horizontale Überbreite gemessen. CSS-Bildhöhen sind für die Unterseite ausdrücklich responsiv gesetzt. Direkte Dateiöffnung und Offline-Neuladen bleiben innerhalb dieser Werkzeugumgebung unbestätigt; sämtliche Laufzeitressourcen sind weiterhin lokal.

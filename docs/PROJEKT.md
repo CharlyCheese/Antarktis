@@ -2,7 +2,7 @@
 
 ## Ziel und Umfang
 
-Die Website vermittelt einen ersten Eindruck der Antarktis: eine bildbetonte Landingpage, typische Landschaften, eine kleine Tierwelt und kompakte Wissensinhalte. Die Gestaltung orientiert sich an Eisweiß, Blau, Türkis und dunklen Meeresfarben. Texte und Bedienelemente sind deutschsprachig.
+Die Website vermittelt einen ersten Eindruck der Antarktis: eine bildbetonte Landingpage, typische Landschaften, eine Tierwelt-Übersicht und kompakte Wissensinhalte. Eine eigene Tierwelt-Unterseite vertieft die Tierporträts und zeigt ein vereinfachtes Nahrungsnetz. Die Gestaltung orientiert sich an Eisweiß, Blau, Türkis und dunklen Meeresfarben. Texte und Bedienelemente sind deutschsprachig.
 
 Die Anwendung besteht aus statischen Dateien. Sie benötigt keinen Server, keine Datenbank, kein Paketmanagement und keinen Build-Prozess. Alle für die Darstellung notwendigen Ressourcen liegen im Projekt. Ein direkter Aufruf von `index.html` über `file://` ist der vorgesehene Offline-Einstieg.
 
@@ -10,7 +10,8 @@ Die Anwendung besteht aus statischen Dateien. Sie benötigt keinen Server, keine
 
 | Bereich | Aufgabe | Bearbeitungsort |
 | --- | --- | --- |
-| Inhalt | Überschriften, Navigation, Abschnitte, Bilder und Karten | `index.html` |
+| Startseite | Überschriften, Navigation, Abschnitte, Bilder und Karten | `index.html` |
+| Tierwelt-Unterseite | Einführung, Sprungnavigation, Tierporträts und vereinfachtes Nahrungsnetz | `tierwelt.html` |
 | Darstellung | Farben, Typografie, Abstände, Layout und responsive Regeln | `styles.css` |
 | Verhalten | Mobiles Navigationsmenü, Filter der Tierkarten und Markierung des aktuellen Abschnitts | `scripts.js` |
 | Landschaftsbilder | Lokal eingebundene Bilddateien für Landschaften | `frontend/bilder_landschaft/` |
@@ -22,9 +23,13 @@ Die Bereiche `backend/` und `database/` sind für spätere Erweiterungen reservi
 
 ### Seitenaufbau
 
-Die Ankernavigation verbindet **Start**, **Landschaften**, **Tierwelt** und **Wissen** auf einer Seite. Die Landingpage führt mit einer großen Landschaftsaufnahme und einer klaren Handlungsaufforderung in die Inhalte. Karten bündeln Landschafts- und Tierinformationen. Der Tierfilter bietet **Alle**, **Pinguine** und **Robben**. Wissensfragen verwenden native `details`- und `summary`-Elemente, damit sie ohne zusätzliches JavaScript bedienbar bleiben.
+Die Ankernavigation der Startseite verbindet **Start**, **Landschaften**, **Tierwelt** und **Wissen**. Die Landingpage führt mit einer großen Landschaftsaufnahme und einer klaren Handlungsaufforderung in die Inhalte. Karten bündeln Landschafts- und Tierinformationen. Der Tierfilter bietet **Alle**, **Pinguine**, **Robben** und **Krill**. Jede der drei Tierkarten enthält genau einen gemeinsamen Bild- und Textlink zum passenden Abschnitt auf `tierwelt.html`: `#pinguine`, `#robben` oder `#krill`. Zusätzliche Buttons mit demselben Ziel und dekorative Nummerierungen werden vermieden. Wissensfragen verwenden native `details`- und `summary`-Elemente, damit sie ohne zusätzliches JavaScript bedienbar bleiben.
+
+Die Unterseite `tierwelt.html` bietet eine kurze Einführung, eine Sprungnavigation und Erklärabschnitte zu Zügelpinguin, Weddellrobbe und Krill. Ein vereinfachtes Nahrungsnetz verdeutlicht ihre Beziehungen im antarktischen Ökosystem. Beide HTML-Seiten laden dieselben Dateien `styles.css` und `scripts.js`. Das Krillfoto liegt lokal unter `frontend/bilder_tiere/krill.jpg`; seine Herkunft und Lizenz stehen wie bei den übrigen Fotos in `docs/BILDQUELLEN.md`.
 
 ### Trennung der Verantwortlichkeiten
+
+Der Wissensbereich enthält außerdem eine Erklärung der geografischen Breite mit einer inline eingebundenen SVG-Kompassrose. Die Grafik ist dekorativ (`aria-hidden`); die Informationen stehen als zugänglicher Text daneben. Eine semantische Tabelle vergleicht den Südpol mit Nordpol, Wostok, Eureka und Ny-Ålesund. Die Breiten sind auf ganze Grad gerundet, die Orte nicht nach Kälte geordnet. Fachliche Quellen stehen im Quellenbereich der Seite. SVG-Farben, Größen und Tabellenlayout werden ausschließlich in `styles.css` gepflegt; zusätzliche Skripte oder Downloads sind nicht erforderlich.
 
 HTML enthält den Inhalt und seine Bedeutung. CSS steuert die Gestaltung. JavaScript ergänzt die Bedienung, ohne Inhalte von externen Diensten nachzuladen. Diese Trennung ermöglicht gezielte Änderungen und vermeidet einen Build-Prozess. Kommentare sollen den Zweck eines Abschnitts oder eine nicht offensichtliche Entscheidung erklären; reine Wiederholungen des Codes sind nicht erforderlich.
 
@@ -34,7 +39,7 @@ Alle Ressourcenpfade sind relativ zum Projekt. Absolute Pfade zu einem bestimmte
 
 ### Texte und Abschnitte
 
-Texte direkt in `index.html` ändern. Die Überschriftenhierarchie beibehalten: eine Hauptüberschrift für die Seite, danach passende Abschnitts- und Kartenüberschriften. Ankerziele und Navigationslinks müssen dieselben IDs verwenden. Jede ID darf nur einmal vorkommen.
+Texte direkt in `index.html` beziehungsweise `tierwelt.html` ändern. Die Überschriftenhierarchie beibehalten: eine Hauptüberschrift pro Seite, danach passende Abschnitts- und Kartenüberschriften. Ankerziele und Navigationslinks müssen dieselben IDs verwenden. Jede ID darf innerhalb einer HTML-Datei nur einmal vorkommen.
 
 Neue Abschnitte können nach dem Muster eines vorhandenen Abschnitts ergänzt werden. Bei Änderungen an Navigation oder Filter auch die zugehörigen Selektoren und Zustände in `scripts.js` prüfen.
 
@@ -42,7 +47,7 @@ Neue Abschnitte können nach dem Muster eines vorhandenen Abschnitts ergänzt we
 
 1. Landschaftsfotos nach `frontend/bilder_landschaft/`, Tierfotos nach `frontend/bilder_tiere/` kopieren.
 2. Beschreibende Dateinamen verwenden; einfache Kleinbuchstaben und Bindestriche erleichtern portable Pfade.
-3. In `index.html` den relativen Bildpfad eintragen. Groß- und Kleinschreibung exakt übernehmen, damit eine spätere Veröffentlichung auf anderen Betriebssystemen funktioniert.
+3. In der jeweiligen HTML-Datei den relativen Bildpfad eintragen; bei mehrfach verwendeten Fotos beide Seiten berücksichtigen. Groß- und Kleinschreibung exakt übernehmen, damit eine spätere Veröffentlichung auf anderen Betriebssystemen funktioniert.
 4. Einen kurzen, sinnvollen Alternativtext setzen. Rein dekorative Bilder erhalten einen leeren Alternativtext; bedeutungstragende Fotos eine konkrete Beschreibung.
 5. Vorhandene Größenangaben und Regeln für das Seitenverhältnis berücksichtigen. Prüfen, ob der Bildausschnitt auf schmalen Bildschirmen das Motiv noch zeigt.
 6. Quelle, Urheber, Lizenz und erforderliche Hinweise in `docs/BILDQUELLEN.md` ergänzen. Bilder nur verwenden, wenn die Nutzungsbedingungen dies erlauben.
@@ -54,7 +59,9 @@ Bilder sollten für die tatsächliche Anzeigegröße optimiert sein. Keine Bildd
 
 Für eine neue Karte eine vorhandene Karte desselben Typs kopieren und Bild, Titel, Text und Alternativtext anpassen. Bei Tierkarten außerdem die vorhandene Kategoriekennzeichnung übernehmen, die `scripts.js` zum Filtern nutzt. Neue Kategorien erfordern einen passenden Filterknopf und eine Prüfung der Filterlogik. Kategorien sollten fachlich zur dargestellten Tierart passen.
 
-Nach Änderungen an Filtern alle Ansichten durchgehen: **Alle**, **Pinguine** und **Robben**. Versteckte Karten dürfen keine per Tastatur erreichbaren Bedienelemente zurücklassen. Der aktive Filter muss visuell und für assistive Technik erkennbar sein.
+Den Bild- und Textbereich jeder Tierkarte in genau einem Link zusammenfassen. Keine zusätzlichen Buttons zum selben Ziel und keine dekorativen Kartennummern ergänzen. Die Linkziele `tierwelt.html#pinguine`, `tierwelt.html#robben` und `tierwelt.html#krill` müssen mit den Abschnitts-IDs und der Sprungnavigation auf der Unterseite übereinstimmen. Bei Umbenennungen alle Verweise gemeinsam anpassen.
+
+Nach Änderungen an Filtern alle Ansichten durchgehen: **Alle**, **Pinguine**, **Robben** und **Krill**. Versteckte Karten dürfen keine per Tastatur erreichbaren Bedienelemente zurücklassen. Der aktive Filter muss visuell und für assistive Technik erkennbar sein.
 
 ### Farben, Typografie und Layout
 
@@ -65,6 +72,8 @@ Responsive Anpassungen stehen in den Media Queries. Neue Komponenten zuerst bei 
 ### JavaScript
 
 Neue Interaktionen in `scripts.js` ergänzen. Die vorhandenen DOM-Selektoren und Zustandsattribute als gemeinsame Schnittstelle zwischen HTML, CSS und JavaScript behandeln. Werden Klassen, IDs oder Datenattribute geändert, müssen alle betroffenen Dateien gemeinsam angepasst werden.
+
+Da beide Seiten dasselbe Skript laden, müssen Funktionen mit nur auf einer Seite vorhandenen Elementen umgehen können. Die automatische Abschnittsmarkierung berücksichtigt ausschließlich Links der Hauptnavigation, deren `href` mit `#` beginnt. Seitenübergreifende Links werden davon nicht verändert; eine feste Kennzeichnung der aktuellen Seite mit `aria-current="page"` bleibt erhalten.
 
 Die grundlegenden Inhalte sollen ohne JavaScript lesbar bleiben. Das Wissens-Accordion nutzt deshalb Browserfunktionen. Für zusätzliche Offline-Funktionen keine Netzwerkanfragen oder externe Bibliotheken voraussetzen.
 
@@ -97,7 +106,7 @@ Der Auftrag wird in kleinen, überprüfbaren Paketen bearbeitet. Die Rollen teil
 | --- | --- | --- |
 | 1. Bestand und Planung | Vorhandene Dateien und Bildordner geprüft, Zuständigkeiten festgelegt | Bestehende Struktur berücksichtigt, Umfang klar |
 | 2. Inhalte und Bilder | Lokale Bilder und deutschsprachige Inhalte vorbereitet | Passende Motive, nachvollziehbare Bildquellen |
-| 3. Grundgerüst | Landingpage, Navigation und Inhaltsabschnitte | Alle Ankerziele erreichbar, sinnvolle HTML-Struktur |
+| 3. Grundgerüst | Landingpage, Tierwelt-Unterseite, Navigation und Inhaltsabschnitte | Alle Seiten- und Ankerziele erreichbar, sinnvolle HTML-Struktur |
 | 4. Gestaltung | Externes CSS mit thematischen Farben und responsivem Layout | Lesbar und bedienbar auf schmalen und breiten Ansichten |
 | 5. Interaktionen | Externes JavaScript für Menü und Tierfilter | Funktionen mit Maus und Tastatur nutzbar |
 | 6. Übergabe | Dokumentation, Git-Repository und `.gitignore` | Lokal startbar, wartbar und für GitHub Desktop vorbereitet |
@@ -109,7 +118,7 @@ Diese Tabelle beschreibt den Ablauf und die Abnahmekriterien, keine vorweggenomm
 
 ### Offline und Ressourcen
 
-1. `index.html` direkt im Browser öffnen.
+1. `index.html` und `tierwelt.html` direkt im Browser öffnen.
 2. Internetverbindung deaktivieren oder den Netzwerkzugriff im Browser unterbinden und die Seite neu laden.
 3. Prüfen, ob sämtliche Bilder, Gestaltung und Interaktionen verfügbar sind.
 4. Browserkonsole auf Fehler und fehlende Dateien prüfen.
@@ -122,6 +131,8 @@ Diese Tabelle beschreibt den Ablauf und die Abnahmekriterien, keine vorweggenomm
 3. Desktopbreite, Tabletbreite und eine schmale Mobilansicht prüfen.
 4. Auf horizontales Scrollen, überlappende Elemente, abgeschnittene Texte und unpassende Bildausschnitte achten.
 5. Im mobilen Menü öffnen, navigieren und schließen; danach die Fensterbreite ändern und den Zustand erneut kontrollieren.
+6. Jede Tierkarte öffnen und den passenden Zielabschnitt auf `tierwelt.html` kontrollieren. Dort die Sprungnavigation und die Rückwege zur Startseite prüfen.
+7. Auf beiden Seiten die aktive Navigation prüfen: Abschnittsmarkierungen dürfen die Kennzeichnung der aktuellen Unterseite nicht überschreiben.
 
 ### Interaktionen und Zugänglichkeit
 
@@ -132,6 +143,7 @@ Diese Tabelle beschreibt den Ablauf und die Abnahmekriterien, keine vorweggenomm
 5. Die Systemeinstellung für reduzierte Bewegung aktivieren und die Seite erneut bedienen.
 6. JavaScript testweise deaktivieren und die grundlegenden Inhalte sowie Wissensfragen prüfen.
 7. Bei veränderten Farben die Kontraste mit einem geeigneten Prüfwerkzeug kontrollieren.
+8. Jede Tierkarte muss genau einen per Tastatur erreichbaren Link enthalten. Nach dem Filtern dürfen ausgeblendete Karten keine zusätzlichen Tabstopps erzeugen.
 
 ### Repository und Übergabe
 
@@ -144,7 +156,7 @@ Eine Prüfung gilt erst als durchgeführt, wenn ihr Ergebnis nachvollziehbar fes
 
 ## Git und Veröffentlichung
 
-Git speichert die Projektgeschichte lokal. GitHub Desktop kann das vorhandene Repository aufnehmen, Änderungen committen und nach Auswahl eines GitHub-Ziels veröffentlichen. Die konkreten Schritte stehen in der `README.md`.
+Git speichert die Projektgeschichte lokal. GitHub Desktop kann das vorhandene Repository aufnehmen, Änderungen committen und nach Auswahl eines GitHub-Ziels veröffentlichen.
 
 Ein Remote wird nicht automatisch eingerichtet. Eine Veröffentlichung auf GitHub oder als Website ist kein Bestandteil des Offline-Betriebs. Für eine spätere Veröffentlichung müssen relative Pfade, Schreibweise der Dateinamen und Nutzungsbedingungen aller eingebundenen Bilder erneut geprüft werden.
 

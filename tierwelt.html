@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Pinguine, Robben und antarktischer Krill: Lerne ihre Lebensweise und ihre Rolle im Nahrungsnetz des Südlichen Ozeans kennen.">
+  <meta name="theme-color" content="#102f3d">
+  <title>Tierwelt der Antarktis — Leben zwischen Eis und Meer</title>
+  <link rel="icon" href="frontend/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <script src="scripts.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#inhalt">Zum Inhalt springen</a>
+  <!-- Die Hauptnavigation führt zurück zu den Bereichen der Startseite. -->
+  <header class="site-header">
+    <a class="brand" href="index.html#start" aria-label="Antarktis – Startseite">
+      <svg class="brand-icon" viewBox="0 0 42 32" fill="none" aria-hidden="true">
+        <path d="M2 29 16 4l8 14 5-8 11 19H2Z" stroke="currentColor" stroke-width="1.8"/>
+        <path d="m10 15 6 3 5-5M24 18l5 4 5-3" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+      ANTARKTIS<span class="brand-dot">.</span>
+    </a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-navigation" hidden>
+      Menü <span aria-hidden="true">☰</span>
+    </button>
+    <nav id="main-navigation" class="navigation" aria-label="Hauptnavigation">
+      <a href="index.html#start">Entdecken</a>
+      <a href="index.html#landschaften">Landschaften</a>
+      <a href="tierwelt.html" aria-current="page">Tierwelt</a>
+      <a href="index.html#wissen">Wissen</a>
+    </nav>
+    <span class="header-coordinate" aria-label="Südpol: 90 Grad südlicher Breite">
+      <svg class="compass-icon" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+        <circle cx="32" cy="32" r="27"/>
+        <path d="M32 5v6m27 21h-6M32 59v-6M5 32h6M32 15l8 17-8 17-8-17Z"/>
+        <path class="compass-needle" d="m32 15 8 17H24Z"/>
+      </svg>
+      90° S
+    </span>
+  </header>
+
+  <main id="inhalt" class="page-width">
+    <section class="wildlife-intro" aria-labelledby="wildlife-page-title">
+      <p class="eyebrow section-label">TIERWELT DER ANTARKTIS</p>
+      <h1 id="wildlife-page-title">Leben zwischen<br><em>Eis und Meer.</em></h1>
+      <p>Vom winzigen Krebstier bis zum geschickten Taucher: Drei Einblicke zeigen, wie Tiere hier leben und wie eng ihre Nahrung miteinander verbunden ist.</p>
+      <nav class="species-navigation" aria-label="Abschnitte der Tierwelt">
+        <a href="#pinguine">Pinguine</a>
+        <a href="#robben">Robben</a>
+        <a href="#krill">Krill</a>
+        <a href="#oekosystem">Das Nahrungsnetz</a>
+      </nav>
+    </section>
+
+    <!-- Stabile IDs sind die Ziele der Bildlinks auf der Startseite. -->
+    <section class="species-section" id="pinguine" aria-labelledby="penguins-title">
+      <figure class="species-photo">
+        <img src="frontend/bilder_tiere/pinguine.jpg" alt="Zügelpinguine auf der Felsküste von Coronation Island" width="3735" height="2801">
+        <figcaption>Zügelpinguine auf den Südlichen Orkneyinseln. Foto: Morhua · CC0 1.0.</figcaption>
+      </figure>
+      <div class="species-copy">
+        <h2 id="penguins-title">Pinguine</h2>
+        <p class="species-name">Im Porträt: Zügelpinguin · <i>Pygoscelis antarctica</i></p>
+        <p>Die schwarze Linie unter dem Kinn gibt dem Zügelpinguin seinen Namen. Diese Art brütet vor allem an der Antarktischen Halbinsel und auf Inseln des Südatlantiks. Auf dem Foto siehst du Tiere an einer felsigen Küste.</p>
+        <h3>Ein Leben in Kolonien</h3>
+        <p>Zur Brutzeit kommen die Tiere an Land zusammen. Beide Eltern übernehmen das Brüten und kümmern sich um den Nachwuchs. Die Nahrung finden sie im Meer; Krill ist ihre wichtigste Beute.</p>
+        <h3>Ihre Rolle im Ökosystem</h3>
+        <p>Zügelpinguine sind Teil des Nahrungsnetzes: Sie fressen kleine Meerestiere und können selbst etwa Seeleoparden zum Opfer fallen. Andere Pinguinarten ernähren sich stärker von Fisch. Deshalb wirkt sich ein verändertes Nahrungsangebot nicht auf alle Arten gleich aus.</p>
+        <a class="species-source" href="https://www.antarctica.gov.au/about-antarctica/animals/penguins/chinstrap-penguin/">Fachquelle: Australian Antarctic Program</a>
+      </div>
+    </section>
+
+    <section class="species-section" id="robben" aria-labelledby="seals-title">
+      <figure class="species-photo">
+        <img src="frontend/bilder_tiere/robbe.jpg" alt="Weddellrobbe schaut aus einem Atemloch im antarktischen Eis" width="1816" height="1196" loading="lazy">
+        <figcaption>Weddellrobbe am Atemloch. Foto: Giuseppe Zibordi; Credit: Michael Van Woert, NOAA NESDIS, ORA · Public Domain.</figcaption>
+      </figure>
+      <div class="species-copy">
+        <h2 id="seals-title">Robben</h2>
+        <p class="species-name">Im Porträt: Weddellrobbe · <i>Leptonychotes weddellii</i></p>
+        <p>Weddellrobben leben an den antarktischen Küsten und sind eng mit dem Festeis verbunden – Meereis, das an der Küste verankert ist. Auf dem Eis ruhen sie und bringen ihre Jungen zur Welt. Unter Wasser suchen sie Nahrung.</p>
+        <h3>Atmen unter dem Eis</h3>
+        <p>Als Säugetiere müssen sie zum Atmen auftauchen. Mit ihren Zähnen halten sie Öffnungen im Eis frei. Auch in der Dunkelheit des Polarwinters müssen sie zuverlässig zu diesen Atemlöchern zurückfinden.</p>
+        <h3>Ihre Rolle im Ökosystem</h3>
+        <p>Weddellrobben jagen vor allem Fische, außerdem Tintenfische und weitere Meerestiere. Robbenarten haben unterschiedliche Speisepläne: Krabbenfresserrobben sind beispielsweise besonders auf Krill spezialisiert. Die Weddellrobbe auf unserem Foto steht daher für einen anderen Teil des Nahrungsnetzes.</p>
+        <a class="species-source" href="https://www.antarctica.gov.au/about-antarctica/animals/seals/weddell-seal/">Fachquelle: Australian Antarctic Program</a>
+      </div>
+    </section>
+
+    <section class="species-section" id="krill" aria-labelledby="krill-title">
+      <figure class="species-photo krill-image">
+        <img src="frontend/bilder_tiere/krill.jpg" alt="Antarktischer Krill mit durchscheinendem Körper und großen dunklen Augen" width="4240" height="2893" loading="lazy">
+        <figcaption>Antarktischer Krill, <i>Euphausia superba</i>. Foto: Dr. Wayne Trivelpiece / NOAA Photo Library · Public Domain.</figcaption>
+      </figure>
+      <div class="species-copy">
+        <h2 id="krill-title">Antarktischer Krill</h2>
+        <p class="species-name">Kleines Krebstier · <i>Euphausia superba</i></p>
+        <p>Krill sieht einer kleinen Garnele ähnlich. Sein Körper ist weitgehend durchsichtig, mit rötlichen Farbpunkten und auffälligen dunklen Augen. Antarktischer Krill wird etwa sechs Zentimeter lang und lebt in großen Schwärmen im Südlichen Ozean.</p>
+        <h3>Von Algen zu großen Meerestieren</h3>
+        <p>Krill frisst unter anderem mikroskopisch kleine Algen. Junge Tiere finden Nahrung auch an der Unterseite des Meereises. Krill wird wiederum von vielen Pinguinen, Fischen, einigen Robbenarten und Bartenwalen gefressen. So gelangt die in Algen gespeicherte Energie zu größeren Tieren.</p>
+        <h3>Warum das Meereis zählt</h3>
+        <p>Besonders in der frühen Entwicklung sind passende Eis- und Nahrungsbedingungen wichtig. Veränderungen des Meereises können deshalb weit über den Krill hinaus wirken: Viele Tiere sind direkt oder über ihre Beute von ihm abhängig.</p>
+        <a class="species-source" href="https://www.antarctica.gov.au/about-antarctica/animals/krill/">Fachquelle: Australian Antarctic Program</a>
+      </div>
+    </section>
+
+    <section class="ecosystem" id="oekosystem" aria-labelledby="ecosystem-title">
+      <p class="eyebrow section-label">ALLES HÄNGT ZUSAMMEN</p>
+      <h2 id="ecosystem-title">Ein kleines Tier verbindet viele.</h2>
+      <p>Phytoplankton nutzt Sonnenlicht zum Wachsen. Krill frisst diese winzigen Algen und wird selbst zur Nahrung. Ein vereinfachter Ausschnitt zeigt, wie Energie im Meer weitergegeben wird:</p>
+      <div class="food-chain" role="group" aria-label="Beispiel einer Nahrungskette: Phytoplankton wird von Krill gefressen; Krill wird von Zügelpinguinen gefressen.">
+        <div><strong>Phytoplankton</strong><small>Winzige Algen nutzen Sonnenlicht.</small></div>
+        <span aria-hidden="true">→</span>
+        <div><strong>Krill</strong><small>Frisst unter anderem diese Algen.</small></div>
+        <span aria-hidden="true">→</span>
+        <div><strong>Zügelpinguine</strong><small>Ernähren sich vor allem von Krill.</small></div>
+      </div>
+      <p>Die Pfeile bedeuten „wird gefressen von“. In der Natur verzweigen sich solche Nahrungsketten zu einem Netz: Fische, Tintenfische, Robben und Wale sind auf unterschiedlichen Wegen verbunden.</p>
+      <a class="species-source" href="https://www.antarctica.gov.au/about-antarctica/animals/food-web/">Fachquelle: Das antarktische Nahrungsnetz</a>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="page-width">
+      <a class="text-link" href="index.html#tierwelt">Zurück zur Übersicht <span aria-hidden="true">←</span></a>
+      <details class="sources" id="quellen">
+        <summary>Quellen & Bildnachweise</summary>
+        <p>Alle Inhalte und Bilder sind lokal verfügbar. Externe Fachquellen benötigen eine Internetverbindung.</p>
+        <ul>
+          <li><a href="https://www.antarctica.gov.au/about-antarctica/animals/penguins/">Australian Antarctic Program – Pinguine und ihre Nahrung</a></li>
+          <li><a href="https://www.antarctica.gov.au/about-antarctica/animals/seals/crabeater-seal/">Australian Antarctic Program – Krabbenfresserrobbe</a></li>
+          <li><a href="docs/BILDQUELLEN.md">Vollständige lokale Bildnachweise und Lizenzlinks</a></li>
+        </ul>
+      </details>
+      <div class="footer-bottom"><span>LEBEN IM SÜDLICHEN OZEAN</span><span>Ein lokales Wissensprojekt · Ohne Tracking</span></div>
+    </div>
+  </footer>
+</body>
+</html>

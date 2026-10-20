@@ -54,9 +54,11 @@
     });
   }
 
-  // Aktueller Abschnitt: auf Scrollen, Anker und Größenänderungen reagieren.
-  const navLinks = [...document.querySelectorAll('.navigation a')];
-  const sections = navLinks.map((link) => document.querySelector(link.getAttribute('href')));
+  // Nur Anker dieser Seite verfolgen. Seitenlinks behalten aria-current="page".
+  const navLinks = [...document.querySelectorAll('.navigation a')]
+    .filter((link) => link.getAttribute('href').startsWith('#'));
+  if (!navLinks.length) return;
+  const sections = navLinks.map((link) => document.getElementById(link.hash.slice(1)));
   let scheduled = false;
   function updateNavigation() {
     const marker = window.innerHeight * 0.35;

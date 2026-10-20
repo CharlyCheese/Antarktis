@@ -44,8 +44,10 @@ h3 { font-weight: 500; }
 .navigation a::after { content: ''; position: absolute; left: 0; right: 0; bottom: 23px; height: 2px; background: var(--teal); transform: scaleX(0); transition: transform .2s; }
 .navigation a:hover, .navigation a[aria-current] { color: var(--ink); }
 .navigation a:hover::after, .navigation a[aria-current]::after { transform: scaleX(1); }
-.header-coordinate { font-size: 12px; letter-spacing: 2px; display: flex; gap: 26px; align-items: center; }
-.header-coordinate span { font-size: 24px; color: var(--teal); }
+.header-coordinate { font-size: 12px; letter-spacing: 2px; display: flex; gap: 12px; align-items: center; white-space: nowrap; }
+.compass-icon { width: 29px; height: 29px; color: var(--teal); }
+.compass-icon, .compass-rose { fill: none; stroke: currentColor; stroke-width: 1.5; }
+.compass-needle { fill: currentColor; }
 .menu-toggle { display: none; }
 
 /* 03 — Titelbild: eigene Bildebene für verständliche Alternativtexte. */
@@ -91,7 +93,6 @@ h1 em { font-family: Georgia, 'Times New Roman', serif; font-weight: 400; letter
 .image-caption .eyebrow { color: #c5e3e3; }
 .image-caption h3 { font-size: 30px; letter-spacing: -.8px; margin-top: 13px; }
 .image-caption p { font-size: 12px; color: #e6eeee; max-width: 440px; margin-top: 12px; }
-.photo-index { position: absolute; top: 26px; right: 26px; font-size: 9px; letter-spacing: 2px; z-index: 1; background: #102f3d99; padding: 8px; }
 .landscape-note { padding: 36px; background: #e0ecea; position: relative; display: flex; flex-direction: column; align-items: flex-start; }
 .line-art { font-family: Georgia, serif; font-size: 64px; line-height: 1; color: #497d78; margin-bottom: 30px; }
 .landscape-note .eyebrow { color: var(--teal); }
@@ -107,15 +108,17 @@ h1 em { font-family: Georgia, 'Times New Roman', serif; font-weight: 400; letter
 .animal-filters button { border: 1px solid var(--line); color: var(--muted); background: transparent; border-radius: 30px; padding: 11px 21px; font-size: 11px; min-height: 44px; }
 .animal-filters button[aria-pressed="true"] { background: var(--ink); color: white; border-color: var(--ink); }
 .animal-filters button:hover { border-color: var(--ink); }
-.animal-filters button span { padding-left: 10px; opacity: .7; font-size: 9px; }
-.animal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+.animal-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 30px; }
+.animal-card-link { display: block; height: 100%; text-decoration: none; }
+.animal-card-link:hover h3, .animal-card-link:focus-visible h3 { color: var(--teal); }
+.animal-card-link:focus-visible { outline-offset: 8px; }
 .animal-image-wrap { position: relative; overflow: hidden; background: var(--ice); }
-.animal-image-wrap img { width: 100%; height: 335px; transition: transform .5s; }
+.animal-image-wrap img { width: 100%; height: 255px; transition: transform .5s; }
 .animal-card:hover img { transform: scale(1.025); }
 .image-tag { position: absolute; bottom: 18px; left: 20px; padding: 9px 12px; background: var(--paper); color: var(--ink); font-size: 8px; letter-spacing: 1.4px; }
-.animal-description { display: flex; gap: 22px; padding-top: 23px; }
-.animal-number { font-size: 10px; color: var(--teal); padding-top: 6px; }
-.animal-description h3 { font-size: 26px; letter-spacing: -.5px; }
+.animal-description { padding-top: 23px; }
+.animal-description h3 { display: flex; justify-content: space-between; gap: 12px; font-size: 24px; letter-spacing: -.5px; }
+.animal-description h3 span { font-size: 20px; color: var(--teal); }
 .animal-description p { font-size: 12px; color: var(--muted); margin-top: 13px; max-width: 460px; }
 
 /* 06 — Native Details bleiben ohne Skript per Tastatur bedienbar. */
@@ -123,18 +126,34 @@ h1 em { font-family: Georgia, 'Times New Roman', serif; font-weight: 400; letter
 .knowledge-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 100px; }
 .knowledge .section-label { color: var(--mint); }
 .knowledge-intro { font-size: 13px; color: #b4c9ce; margin-top: 25px; }
-.south-marker { display: flex; gap: 18px; align-items: center; margin-top: 43px; }
-.south-marker > span { width: 57px; height: 57px; border-radius: 50%; border: 1px solid #54707c; display: grid; place-items: center; font-size: 30px; font-weight: 200; color: var(--mint); }
-.south-marker p { font-size: 13px; letter-spacing: 2px; }
-.south-marker small { font-size: 8px; color: #b4c9ce; }
 .questions details { border-top: 1px solid #3d5763; padding-block: 24px; }
 .questions details:last-child { border-bottom: 1px solid #3d5763; }
-.questions summary { list-style: none; display: flex; align-items: baseline; gap: 17px; font-size: 14px; line-height: 1.6; padding-right: 30px; position: relative; }
+.questions summary { list-style: none; font-size: 14px; line-height: 1.6; padding-right: 30px; position: relative; }
 .questions summary::-webkit-details-marker { display: none; }
-.questions summary > span { color: #a2c8c6; font-size: 10px; }
 .questions summary::after { content: '+'; position: absolute; right: 2px; font-size: 22px; top: -5px; color: var(--mint); }
 .questions details[open] summary::after { content: '−'; }
-.questions details p { font-size: 12px; color: #c0d0d5; padding-left: 31px; padding-top: 17px; }
+.questions details p { font-size: 12px; color: #c0d0d5; padding-top: 17px; }
+
+/* Orientierung und Ortsvergleich bleiben auch mobil vollständig sichtbar. */
+.polar-guide { grid-column: 1 / -1; min-width: 0; padding-top: 45px; border-top: 1px solid #3d5763; }
+.polar-explanation { display: grid; grid-template-columns: 112px minmax(0, 1fr); gap: 32px; align-items: start; max-width: 890px; }
+.compass-rose { width: 112px; height: 112px; color: var(--mint); }
+.compass-inner-ring { opacity: .35; }
+.compass-rose text { fill: currentColor; stroke: none; font-size: 13px; text-anchor: middle; }
+.polar-explanation h3 { font-size: 27px; letter-spacing: -.5px; margin-bottom: 17px; }
+.polar-explanation p { font-size: 13px; color: #c0d0d5; }
+.polar-explanation p + p { margin-top: 12px; }
+.polar-explanation strong { color: var(--paper); font-weight: 500; }
+.polar-comparison { width: 100%; border-collapse: collapse; margin-top: 38px; text-align: left; font-size: 13px; line-height: 1.65; }
+.polar-comparison caption { text-align: left; font-size: 20px; padding-bottom: 23px; }
+.polar-comparison caption span { display: block; color: #b4c9ce; font-size: 11px; margin-top: 5px; }
+.polar-comparison th, .polar-comparison td { padding: 17px 20px 17px 0; border-bottom: 1px solid #3d5763; vertical-align: top; }
+.polar-comparison thead th { color: var(--mint); font-size: 11px; font-weight: 400; padding-top: 0; }
+.polar-comparison tbody th { width: 23%; font-weight: 500; }
+.polar-comparison tbody th span { display: block; color: #b4c9ce; font-size: 11px; font-weight: 400; }
+.polar-comparison td:nth-child(2) { width: 15%; white-space: nowrap; color: var(--mint); }
+.polar-comparison td:last-child { color: #c0d0d5; padding-right: 0; }
+.polar-context { font-size: 12px; color: #b4c9ce; margin-top: 20px; max-width: 750px; }
 .closing { text-align: center; padding-block: 100px; }
 .closing h2 { font-family: Georgia, 'Times New Roman', serif; font-size: clamp(38px, 4vw, 56px); letter-spacing: -1.8px; }
 .closing > p:not(.eyebrow) { color: var(--muted); font-size: 13px; margin-top: 25px; }
@@ -148,6 +167,31 @@ h1 em { font-family: Georgia, 'Times New Roman', serif; font-weight: 400; letter
 .sources summary { width: fit-content; padding: 7px 0; }
 .sources p { margin-top: 15px; }
 .sources ul { padding-left: 20px; line-height: 2; }
+
+/* Tierwelt-Unterseite: gemeinsam genutztes CSS, statische Abschnitte statt Pop-ups. */
+.wildlife-intro { padding-block: 70px 46px; }
+.wildlife-intro h1 { font-size: clamp(40px, 5vw, 68px); letter-spacing: -2px; max-width: 900px; }
+.wildlife-intro > p:not(.eyebrow) { color: var(--muted); max-width: 680px; font-size: 15px; margin-top: 25px; }
+.species-navigation { display: flex; flex-wrap: wrap; gap: 14px 28px; margin-top: 30px; }
+.species-navigation a { font-size: 13px; padding-block: 10px; }
+.species-section { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 60px; padding-block: 64px; border-top: 1px solid var(--line); }
+.species-photo { margin: 0; }
+.species-photo img { width: 100%; height: auto; aspect-ratio: 4 / 3; }
+.krill-image img { object-fit: contain; background: #050505; }
+.species-photo figcaption { margin-top: 12px; font-size: 11px; line-height: 1.6; color: var(--muted); }
+.species-copy h2 { font-size: clamp(30px, 3vw, 42px); }
+.species-name { margin-top: 12px; color: var(--teal); font-size: 12px; }
+.species-copy > p:not(.species-name) { font-size: 14px; color: var(--muted); margin-top: 20px; }
+.species-copy h3 { font-size: 18px; margin-top: 28px; }
+.species-copy > h3 + p { margin-top: 9px; }
+.species-source { font-size: 11px; display: inline-block; margin-top: 23px; color: var(--teal); }
+.ecosystem { margin-block: 20px 75px; padding: 46px; background: var(--ice); }
+.ecosystem > p { font-size: 14px; color: var(--muted); margin-top: 20px; max-width: 850px; }
+.food-chain { display: flex; align-items: center; gap: 18px; margin-top: 30px; }
+.food-chain > div { flex: 1; padding: 20px; background: var(--paper); border-top: 2px solid var(--teal); }
+.food-chain strong { display: block; font-size: 15px; font-weight: 500; }
+.food-chain small { display: block; font-size: 12px; line-height: 1.6; margin-top: 8px; color: var(--muted); }
+.food-chain > span { color: var(--teal); font-size: 25px; }
 
 /* 07 — Responsive Layout, ohne separate mobile Inhalte. */
 @media (min-width: 1600px) { .site-header { padding-inline: max(var(--gutter), calc((100vw - var(--page)) / 2)); } }
@@ -163,7 +207,8 @@ h1 em { font-family: Georgia, 'Times New Roman', serif; font-weight: 400; letter
   .landscape-grid { grid-template-columns: 1.25fr 1fr; }
   .landscape-note { padding: 28px; }
   .image-caption { left: 28px; right: 28px; }
-  .animal-image-wrap img { height: 280px; }
+  .animal-image-wrap img { height: 220px; }
+  .species-section { gap: 32px; }
   .knowledge-grid { gap: 45px; }
 }
 @media (max-width: 760px) {
@@ -187,7 +232,6 @@ h1 em { font-family: Georgia, 'Times New Roman', serif; font-weight: 400; letter
   .hero-content { padding-bottom: 30px; }
   .hero-bottom { font-size: 7px; letter-spacing: 1px; }
   .hero-bottom a { font-size: 10px; }
-  .hero-edition { display: none; }
   .desktop-break { display: none; }
   .intro { padding-block: 60px; grid-template-columns: 1fr; gap: 26px; }
   .intro-detail { padding-top: 0; }
@@ -206,9 +250,20 @@ h1 em { font-family: Georgia, 'Times New Roman', serif; font-weight: 400; letter
   .animal-filters { gap: 6px; flex-wrap: wrap; }
   .animal-filters button { padding-inline: 16px; }
   .animal-image-wrap img { height: auto; aspect-ratio: 4 / 3; }
-  .animal-description { gap: 18px; }
+  .wildlife-intro { padding-block: 45px 35px; }
+  .species-section { grid-template-columns: 1fr; gap: 28px; padding-block: 40px; }
+  .ecosystem { padding: 26px; margin-bottom: 50px; }
+  .food-chain { flex-direction: column; align-items: stretch; gap: 12px; }
+  .food-chain > span { align-self: center; transform: rotate(90deg); }
   .knowledge-grid { grid-template-columns: 1fr; gap: 40px; }
-  .south-marker { display: none; }
+  .polar-guide { padding-top: 35px; }
+  .polar-explanation { grid-template-columns: 1fr; gap: 22px; }
+  .compass-rose { width: 82px; height: 82px; }
+  .polar-explanation h3 { font-size: 25px; }
+  .polar-comparison { font-size: 12px; }
+  .polar-comparison th, .polar-comparison td { padding: 14px 10px 14px 0; overflow-wrap: anywhere; }
+  .polar-comparison tbody th { width: 28%; }
+  .polar-comparison td:nth-child(2) { width: 19%; }
   .questions summary { font-size: 13px; }
   .closing { padding-block: 70px; }
   .footer-top { flex-wrap: wrap; }
