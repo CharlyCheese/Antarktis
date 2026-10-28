@@ -4,16 +4,17 @@
 
 Die Website vermittelt einen ersten Eindruck der Antarktis: eine bildbetonte Landingpage, typische Landschaften, eine Tierwelt-Übersicht und kompakte Wissensinhalte. Eine eigene Tierwelt-Unterseite vertieft die Tierporträts und zeigt ein vereinfachtes Nahrungsnetz. Die Gestaltung orientiert sich an Eisweiß, Blau, Türkis und dunklen Meeresfarben. Texte und Bedienelemente sind deutschsprachig.
 
-Die Anwendung besteht aus statischen Dateien. Sie benötigt keinen Server, keine Datenbank, kein Paketmanagement und keinen Build-Prozess. Alle für die Darstellung notwendigen Ressourcen liegen im Projekt. Ein direkter Aufruf von `index.html` über `file://` ist der vorgesehene Offline-Einstieg.
+Die Anwendung besteht aus statischen Dateien. Sie benötigt keinen Server, keine Datenbank, kein Paketmanagement und keinen Build-Prozess. Alle für die Darstellung notwendigen Ressourcen liegen im Projekt. `opening.html` bietet einen optionalen animierten Offline-Einstieg; `index.html` bleibt direkt erreichbar.
 
 ## Architektur
 
 | Bereich | Aufgabe | Bearbeitungsort |
 | --- | --- | --- |
+| Optionaler Einstieg | Eisdecke mit vier SVG-Schollen und Link zur Startseite | `opening.html` |
 | Startseite | Überschriften, Navigation, Abschnitte, Bilder und Karten | `index.html` |
 | Tierwelt-Unterseite | Einführung, Sprungnavigation, Tierporträts und vereinfachtes Nahrungsnetz | `tierwelt.html` |
 | Darstellung | Farben, Typografie, Abstände, Layout und responsive Regeln | `styles.css` |
-| Verhalten | Mobiles Navigationsmenü, Filter der Tierkarten und Markierung des aktuellen Abschnitts | `scripts.js` |
+| Verhalten | Eisbruch-Übergang, mobiles Navigationsmenü, Tierfilter und Abschnittsmarkierung | `scripts.js` |
 | Landschaftsbilder | Lokal eingebundene Bilddateien für Landschaften | `frontend/bilder_landschaft/` |
 | Tierbilder | Lokal eingebundene Bilddateien für die Tierwelt | `frontend/bilder_tiere/` |
 | Nachweise | Herkunft, Urheber und Nutzungsbedingungen der Bilder | `docs/BILDQUELLEN.md` |
@@ -25,7 +26,39 @@ Die Bereiche `backend/` und `database/` sind für spätere Erweiterungen reservi
 
 Die Ankernavigation der Startseite verbindet **Start**, **Landschaften**, **Tierwelt** und **Wissen**. Die Landingpage führt mit einer großen Landschaftsaufnahme und einer klaren Handlungsaufforderung in die Inhalte. Karten bündeln Landschafts- und Tierinformationen. Der Tierfilter bietet **Alle**, **Pinguine**, **Robben** und **Krill**. Jede der drei Tierkarten enthält genau einen gemeinsamen Bild- und Textlink zum passenden Abschnitt auf `tierwelt.html`: `#pinguine`, `#robben` oder `#krill`. Zusätzliche Buttons mit demselben Ziel und dekorative Nummerierungen werden vermieden. Wissensfragen verwenden native `details`- und `summary`-Elemente, damit sie ohne zusätzliches JavaScript bedienbar bleiben.
 
-Die Unterseite `tierwelt.html` bietet eine kurze Einführung, eine Sprungnavigation und Erklärabschnitte zu Zügelpinguin, Weddellrobbe und Krill. Ein vereinfachtes Nahrungsnetz verdeutlicht ihre Beziehungen im antarktischen Ökosystem. Beide HTML-Seiten laden dieselben Dateien `styles.css` und `scripts.js`. Das Krillfoto liegt lokal unter `frontend/bilder_tiere/krill.jpg`; seine Herkunft und Lizenz stehen wie bei den übrigen Fotos in `docs/BILDQUELLEN.md`.
+Die Unterseite `tierwelt.html` bietet eine kurze Einführung, eine Sprungnavigation und Erklärabschnitte zu Zügelpinguin, Weddellrobbe und Krill. Ein vereinfachtes Nahrungsnetz verdeutlicht ihre Beziehungen im antarktischen Ökosystem. Alle HTML-Seiten laden dieselben Dateien `styles.css` und `scripts.js`. Das Krillfoto liegt lokal unter `frontend/bilder_tiere/krill.jpg`; seine Herkunft und Lizenz stehen wie bei den übrigen Fotos in `docs/BILDQUELLEN.md`.
+
+### Optionaler Eisbruch-Einstieg
+
+`opening.html` zeigt eine künstlich erzeugte Eistextur mit einem unregelmäßigen Riss. „Das Eis brechen“ ist ein einzelner nativer Link nach `index.html`. Mit JavaScript bewegen sich vier SVG-Schollen in etwa 1,2 Sekunden auseinander. Darunter liegt die echte Startseite in einem nicht interaktiven, mit `inert` und `aria-hidden` ausgeblendeten Iframe; so muss ihr sichtbarer Aufbau nicht auf der Einstiegsseite dupliziert werden. Ohne JavaScript funktioniert der Link unmittelbar. Bei `prefers-reduced-motion` ersetzt eine kurze Blende die Bewegung.
+
+Nach erfolgtem Eintritt merkt `sessionStorage` unter `antarktis.openingSeen`, dass der Einstieg in diesem Tab bereits benutzt wurde. Ein erneuter Aufruf führt dann direkt zur Startseite. Zugriff auf den Sitzungsspeicher ist durch Fehlerbehandlung abgesichert: Ist er etwa beim lokalen Datei-Aufruf gesperrt, bleibt der Einstieg trotzdem bedienbar. Es werden keine Daten an externe Dienste übertragen. `index.html` leitet von sich aus nicht zum Einstieg um.
+
+### Eistextur-Buttons
+
+Die Hauptschaltfläche der Startseite, die vier Tierfilter und das mobile Menü auf beiden Inhaltsseiten tragen die Klasse `ice-button`. Sie verwenden dieselbe lokale Eistextur wie der Einstieg. Eine helle, ruhige Mitte hält die Beschriftung lesbar; leicht unterschiedliche Bruchkonturen bilden die Ränder. Margin, Padding und die rechteckige Klickfläche bleiben erhalten.
+
+`decorateIceButtons()` in `scripts.js` ergänzt dekorative, für assistive Technik ausgeblendete SVGs. Drei feste Konturen sorgen für wiedererkennbare Formen. Die SVG-IDs sind innerhalb jeder Seite eindeutig. Farben und Zustände liegen in `styles.css`: Der ausgewählte Filter und das geöffnete Menü erhalten einen umgekehrten Blauverlauf. Bei Hover, Tastaturfokus oder Klick läuft ein Lichtreflex ausschließlich über den maskierten Rand. Bei reduzierter Bewegung entfällt die Animation. Ohne JavaScript liefert CSS einen einfachen Eisbelag; native Links bleiben bedienbar.
+
+Beim Austausch von `frontend/bilder_landschaft/eisdecke.png` auch die Buttons kontrollieren. Wird der Dateiname geändert, müssen die Verweise in `opening.html`, `scripts.js` und `styles.css` gemeinsam angepasst werden. Neue Schaltflächen können dieselbe Klasse nutzen; ihre Beschriftung darf nicht durch dekorative Elemente ersetzt werden.
+
+### Gemeinsame Kristallgestaltung
+
+Startseite und Tierwelt-Unterseite greifen das Material der Eisbuttons auf: eine blassblaue Eistextur im Hintergrund, frostige Kopf- und Fußzeilen, helle Kartenflächen und feine Bruchkanten an den freien Abschnittsrändern. Der Wissensbereich verwendet eine dunkle Variante derselben Textur. Die Kartenbeschriftungen haben eigene Innenabstände; Buttonabstände und bestehende Inhaltsraster bleiben erhalten.
+
+Die Umsetzung liegt vollständig in `styles.css`. `--ice-texture` verweist auf das vorhandene lokale Bild, `--frost-panel` definiert die helle Deckschicht und `--frost-shadow` die zurückhaltende Tiefe. Die Variablen `--teal` und `--mint` bleiben aus Kompatibilitätsgründen benannt, enthalten nun jedoch auf das Eismaterial abgestimmte Blautöne. Textflächen sind stärker abgedeckt als Seitenränder. Beim Ändern der Deckkraft müssen Kontraste auch über den dunklen beziehungsweise hellen Stellen der Textur geprüft werden.
+
+Bruchkanten sind nicht interaktive Pseudoelemente. Nur Bilder erhalten kleine abgeschrägte Ecken; Text, Links und ihre Fokusrahmen werden nicht beschnitten. Die Dekoration erzeugt keine zusätzlichen Animationen. Die separate Einstiegsseite ist vom neuen Seitenhintergrund ausgenommen. Im dunklen Wissensbereich und über dem Titelbild wird der Tastaturfokus hell hervorgehoben.
+
+### Navigation, Überschriften und Erklärflächen
+
+Alle Links der Hauptnavigation zeigen dauerhaft eine flache Eisfläche. Eine kräftigere blaue Unterkante markiert den aktuellen Link (`aria-current`); bei Hover und Tastaturfokus werden Fläche und Kante sanft aufgehellt. Die Dekoration liegt hinter dem Text, nimmt keine Klicks an und beschneidet ausschließlich ihre eigenen Ecken. Auf schmalen Bildschirmen dürfen die mindestens 44 Pixel hohen Navigationslinks umbrechen. Das vorhandene mobile Menü und seine Zustandslogik bleiben erhalten.
+
+Überschriften erhalten Gletscherblau auf hellen Flächen beziehungsweise Eisweiß auf dunklen Flächen. Ausgewählte Abschnittstitel tragen eine kurze dekorative Eiskante darunter. Titel über Fotos bleiben hell; es werden keine zusätzlichen klickbaren Überschriften oder Nummerierungen eingeführt. Kleine Abschnittsbezeichnungen sind 12 Pixel groß und kräftiger gesetzt. Die einleitende Zeile über dem Titelbild hat eine dunkle Kontrastfläche; Begleittexte neben Abschnittstiteln sind 15 Pixel groß und durch eine feine Seitenkante hervorgehoben.
+
+Die vier Sprunglinks der Tierwelt-Unterseite tragen dieselbe Klasse `ice-button` wie die Tierfilter und bleiben native Ankerlinks. Bildbeschriftungen tragen `ice-label`: `decorateIceButtons()` ergänzt dort denselben dekorativen Eisbelag, jedoch keine eigenen Klickbehandlungen oder Tabstopps. Die Bildbeschriftung bleibt ein `span` innerhalb des einzigen Kartenlinks. Die Grundposition wird durch `image-tag` festgelegt; ohne JavaScript steht der CSS-Eisbelag weiterhin zur Verfügung.
+
+Der Einführungstext, die Breitengrad-Erklärung und die erklärenden Absätze unter den Zwischenüberschriften der Tierporträts erhalten eine dezente Seitenkante mit schwachem Farbverlauf. Diese Gestaltung liegt in `styles.css`; die semantische Struktur und Inhalte bleiben erhalten. Reduzierte Bewegung deaktiviert auch die Navigationstransitionen.
 
 ### Trennung der Verantwortlichkeiten
 
@@ -55,6 +88,8 @@ Neue Abschnitte können nach dem Muster eines vorhandenen Abschnitts ergänzt we
 
 Bilder sollten für die tatsächliche Anzeigegröße optimiert sein. Keine Bilddatei nur durch eine kleinere CSS-Breite verkleinern: Das reduziert die zu ladende Dateigröße nicht.
 
+Die Eistextur liegt unter `frontend/bilder_landschaft/eisdecke.png`. Sie ist ein dekoratives KI-Bild, keine dokumentarische Aufnahme. Beim Austausch den Bildpfad im Einstieg berücksichtigen und einen ruhigen Mittelpunkt für den Link erhalten. Die SVG-Flächen definieren die zusammengehörigen Bruchkanten; diese beim Bearbeiten gemeinsam anpassen, damit die geschlossene Eisdecke keine unbeabsichtigten Lücken zeigt. Bewegungsrichtung, Dauer und reduzierte Bewegung stehen in `styles.css`; den Zeitpunkt des Seitenwechsels in `scripts.js` dazu passend halten.
+
 ### Karten und Tierfilter
 
 Für eine neue Karte eine vorhandene Karte desselben Typs kopieren und Bild, Titel, Text und Alternativtext anpassen. Bei Tierkarten außerdem die vorhandene Kategoriekennzeichnung übernehmen, die `scripts.js` zum Filtern nutzt. Neue Kategorien erfordern einen passenden Filterknopf und eine Prüfung der Filterlogik. Kategorien sollten fachlich zur dargestellten Tierart passen.
@@ -73,7 +108,7 @@ Responsive Anpassungen stehen in den Media Queries. Neue Komponenten zuerst bei 
 
 Neue Interaktionen in `scripts.js` ergänzen. Die vorhandenen DOM-Selektoren und Zustandsattribute als gemeinsame Schnittstelle zwischen HTML, CSS und JavaScript behandeln. Werden Klassen, IDs oder Datenattribute geändert, müssen alle betroffenen Dateien gemeinsam angepasst werden.
 
-Da beide Seiten dasselbe Skript laden, müssen Funktionen mit nur auf einer Seite vorhandenen Elementen umgehen können. Die automatische Abschnittsmarkierung berücksichtigt ausschließlich Links der Hauptnavigation, deren `href` mit `#` beginnt. Seitenübergreifende Links werden davon nicht verändert; eine feste Kennzeichnung der aktuellen Seite mit `aria-current="page"` bleibt erhalten.
+Da alle Seiten dasselbe Skript laden, müssen Funktionen mit nur auf einer Seite vorhandenen Elementen umgehen können. Die automatische Abschnittsmarkierung berücksichtigt ausschließlich Links der Hauptnavigation, deren `href` mit `#` beginnt. Seitenübergreifende Links werden davon nicht verändert; eine feste Kennzeichnung der aktuellen Seite mit `aria-current="page"` bleibt erhalten.
 
 Die grundlegenden Inhalte sollen ohne JavaScript lesbar bleiben. Das Wissens-Accordion nutzt deshalb Browserfunktionen. Für zusätzliche Offline-Funktionen keine Netzwerkanfragen oder externe Bibliotheken voraussetzen.
 
@@ -118,7 +153,7 @@ Diese Tabelle beschreibt den Ablauf und die Abnahmekriterien, keine vorweggenomm
 
 ### Offline und Ressourcen
 
-1. `index.html` und `tierwelt.html` direkt im Browser öffnen.
+1. `opening.html`, `index.html` und `tierwelt.html` direkt im Browser öffnen.
 2. Internetverbindung deaktivieren oder den Netzwerkzugriff im Browser unterbinden und die Seite neu laden.
 3. Prüfen, ob sämtliche Bilder, Gestaltung und Interaktionen verfügbar sind.
 4. Browserkonsole auf Fehler und fehlende Dateien prüfen.
@@ -144,6 +179,7 @@ Diese Tabelle beschreibt den Ablauf und die Abnahmekriterien, keine vorweggenomm
 6. JavaScript testweise deaktivieren und die grundlegenden Inhalte sowie Wissensfragen prüfen.
 7. Bei veränderten Farben die Kontraste mit einem geeigneten Prüfwerkzeug kontrollieren.
 8. Jede Tierkarte muss genau einen per Tastatur erreichbaren Link enthalten. Nach dem Filtern dürfen ausgeblendete Karten keine zusätzlichen Tabstopps erzeugen.
+9. Den Eisbruch-Einstieg mit Klick und Tastatur auslösen, den Wechsel zur Startseite prüfen und `opening.html` danach im selben Tab erneut aufrufen. Zusätzlich ohne JavaScript, mit reduziertem Bewegungswunsch und mit gesperrtem Sitzungsspeicher prüfen. Die eingebettete Startseite darf während des Einstiegs keine zusätzlichen Tabstopps erzeugen.
 
 ### Repository und Übergabe
 

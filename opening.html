@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Brich das Eis und entdecke die Antarktis.">
+  <meta name="theme-color" content="#d8edf3">
+  <title>Antarktis — Das Eis brechen</title>
+  <link rel="icon" href="frontend/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <script src="scripts.js" defer></script>
+</head>
+<body class="opening-page">
+  <main class="opening-stage" aria-labelledby="opening-title">
+    <!-- Die echte Zielseite liegt bereits unter dem Eis. Sie ist hier weder
+         fokussierbar noch für Screenreader doppelt zugänglich. -->
+    <div class="opening-destination" inert aria-hidden="true">
+      <iframe src="index.html" title="Vorschau der Antarktis-Startseite" tabindex="-1"></iframe>
+    </div>
+
+    <!-- Gemeinsame Textur und passgenaue Bruchkanten: vier unabhängig bewegte
+         SVG-Flächen. Das feste Koordinatensystem wird auf Mobilgeräten beschnitten. -->
+    <svg class="ice-surface" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+      <defs>
+        <pattern id="ice-texture" width="1600" height="1000" patternUnits="userSpaceOnUse">
+          <image href="frontend/bilder_landschaft/eisdecke.png" width="1600" height="1000" preserveAspectRatio="xMidYMid slice"/>
+        </pattern>
+      </defs>
+      <g class="ice-slab ice-slab-top" fill="url(#ice-texture)">
+        <path class="ice-plate" d="M-20-20H1620L1600 0 1460 90 1400 170 1280 180 1190 260 1100 285 1050 360 950 385 890 450 800 485 750 470 710 420 600 400 560 340 450 300 400 240 260 210 190 125 110 105 0 0Z"/>
+        <path class="ice-edge" d="M0 0 110 105 190 125 260 210 400 240 450 300 560 340 600 400 710 420 750 470 800 485 890 450 950 385 1050 360 1100 285 1190 260 1280 180 1400 170 1460 90 1600 0"/>
+        <path class="ice-hairline" d="m600 400 18-82-37-49 9-52m361 168 16-65-24-37 17-68m-560 25 12-53-32-28"/>
+      </g>
+      <g class="ice-slab ice-slab-right" fill="url(#ice-texture)">
+        <path class="ice-plate" d="M1620-20V1020L1600 1000 1490 900 1370 870 1320 785 1190 750 1140 675 1020 640 970 570 860 535 800 485 890 450 950 385 1050 360 1100 285 1190 260 1280 180 1400 170 1460 90 1600 0Z"/>
+        <path class="ice-edge" d="m800 485 90-35 60-65 100-25 50-75 90-25 90-80 120-10 60-80 140-90"/>
+        <path class="ice-hairline" d="m1050 360 84 32 65-17 44 39m-223 226 87-32 42 27 74-12m177-453 30 74 55 25"/>
+      </g>
+      <g class="ice-slab ice-slab-bottom" fill="url(#ice-texture)">
+        <path class="ice-plate" d="M1620 1020H-20L0 1000 120 915 260 880 320 795 440 760 500 670 620 625 660 555 745 535 800 485 860 535 970 570 1020 640 1140 675 1190 750 1320 785 1370 870 1490 900 1600 1000Z"/>
+        <path class="ice-edge" d="m0 1000 120-85 140-35 60-85 120-35 60-90 120-45 40-70 85-20 55-50 60 50 110 35 50 70 120 35 50 75 130 35 50 85 120 30 110 100"/>
+        <path class="ice-hairline" d="m620 625 31 72-24 57 31 46m362-160-20 82 27 35-10 69m-577-66-5 76 30 32"/>
+      </g>
+      <g class="ice-slab ice-slab-left" fill="url(#ice-texture)">
+        <path class="ice-plate" d="M-20 1020V-20L0 0 110 105 190 125 260 210 400 240 450 300 560 340 600 400 710 420 750 470 800 485 745 535 660 555 620 625 500 670 440 760 320 795 260 880 120 915 0 1000Z"/>
+        <path class="ice-edge" d="m0 1000 120-85 140-35 60-85 120-35 60-90 120-45 40-70 85-20 55-50"/>
+        <path class="ice-hairline" d="m560 340-84 28-42-18-64 13m130 307-95-23-51 24-46-12m-48-449-50 52-67 4"/>
+      </g>
+    </svg>
+
+    <h1 id="opening-title" class="opening-brand">Antarktis</h1>
+    <!-- Ein einziges Ziel für Riss und Text. Ohne JavaScript folgt der Browser
+         diesem normalen Link unmittelbar. Enter und modifizierte Klicks bleiben nutzbar. -->
+    <a class="ice-trigger" href="index.html" aria-label="Das Eis brechen – zur Antarktis-Startseite">
+      <span>Das Eis brechen</span>
+    </a>
+    <p class="sr-only" id="opening-status" role="status"></p>
+  </main>
+</body>
+</html>

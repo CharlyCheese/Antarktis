@@ -2,6 +2,8 @@
 
 Alle Fotos liegen im Projekt und funktionieren ohne Internet. Die Links dienen der Herkunfts- und Lizenzprüfung; die Website lädt keine Bilder von externen Servern. Quellen geprüft am 19. Oktober 2026.
 
+Die zusätzliche Eistextur für den Einstieg wurde am 27. Oktober 2026 künstlich erzeugt; sie ist keine dokumentarische Aufnahme. Ihre Herkunft ist unten gesondert beschrieben.
+
 | Lokale Datei | Motiv | Urheber / Credit | Quelle und Lizenz |
 | --- | --- | --- | --- |
 | `frontend/bilder_landschaft/hero-antarktis.jpg` | Blauer Eisberg mit antarktischen Bergen im Hintergrund | Derek Oyen | [Original auf Unsplash](https://unsplash.com/photos/iceberg-near-mountain-during-day-m5r2FFo8NJM), [Unsplash-Lizenz](https://unsplash.com/license) |
@@ -11,6 +13,18 @@ Alle Fotos liegen im Projekt und funktionieren ohne Internet. Die Links dienen d
 | `frontend/bilder_tiere/krill.jpg` | Antarktischer Krill (*Euphausia superba*), Seitenansicht vor schwarzem Hintergrund; Aufnahme von 1990 | Dr. Wayne Trivelpiece / NOAA Photo Library | [Original auf Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Euphausia_superba.jpg), Public Domain gemäß der dort dokumentierten NOAA-Freigabe (US-Bundesbehördenwerk) |
 
 ## Bearbeitung und Nutzung
+
+### Generierte Eistextur
+
+`frontend/bilder_landschaft/eisdecke.png` wurde am 27. Oktober 2026 mit dem integrierten Imagegen-Werkzeug erzeugt. Das zuvor abgestimmte Storyboard diente nur als Referenz für Eismaterial und Farbpalette. Die Datei zeigt eine durchgehende, milchig blaue Eisoberfläche mit Frost und eingeschlossenen Luftblasen, ohne Schrift, Landschaft oder Hauptbruchlinien. Die Risse und beweglichen Schollen entstehen durch die SVG-Geometrie der Einstiegsseite. Das Bild wird unverändert lokal eingebunden und ist als dekorative Illustration zu verstehen; es erhält keine der oben genannten Fotolizenzen.
+
+Generierungsbrief: fotorealistische Eistextur aus der Vogelperspektive, weiches Tageslicht, Eisweiß und blasses Blau, ruhiger Mittelpunkt für die Beschriftung, keine Hauptspalten, kein Meer, kein Horizont und keine Texte. Integriertes Imagegen verwendet; kein API-/CLI-Fallback.
+
+Dieselbe Datei wird auch für die Eistextur der Hauptschaltfläche, Tierfilter und mobilen Menübuttons verwendet. Ausschnitt, helle Textfläche, Randkonturen und Lichtreflex entstehen durch CSS und SVG; dafür wurde kein zusätzliches Bild erzeugt.
+
+Auch Seitenhintergründe, Kopf- und Fußzeilen, Karten sowie der dunkle Wissensbereich verwenden diese Textur. CSS-Farbschichten schwächen sie hinter Beschriftungen ab. Die Bilddatei selbst bleibt unverändert.
+
+### Fotografien
 
 - Die Unsplash-Dateien wurden als JPEG mit 2.400 bzw. 1.800 Pixeln Breite heruntergeladen. Der Bildinhalt wurde nicht verändert.
 - Die drei Wikimedia-Dateien wurden in Originalauflösung gespeichert. Das Krillfoto ist unverändert (4.240 × 2.893 Pixel); nur der lokale Dateiname wurde zu `krill.jpg` vereinfacht.

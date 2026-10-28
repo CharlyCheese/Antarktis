@@ -22,7 +22,7 @@
       </svg>
       ANTARKTIS<span class="brand-dot">.</span>
     </a>
-    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-navigation" hidden>
+    <button class="menu-toggle ice-button" type="button" aria-expanded="false" aria-controls="main-navigation" hidden>
       Menü <span aria-hidden="true">☰</span>
     </button>
     <nav id="main-navigation" class="navigation" aria-label="Hauptnavigation">
@@ -51,7 +51,7 @@
         <p class="eyebrow"><span class="tiny-line"></span> Eine Reise zum südlichsten Kontinent</p>
         <h1 id="hero-title">Fern von allem.<br><em>Näher am Staunen.</em></h1>
         <p class="hero-description">Wo Eis zu Landschaft wird und Stille eine neue<br class="desktop-break"> Dimension bekommt. Willkommen in der Antarktis.</p>
-        <a class="button button-light" href="#landschaften">
+        <a class="button button-light ice-button" href="#landschaften">
           Die Antarktis entdecken <span aria-hidden="true">↗</span>
         </a>
       </div>
@@ -135,10 +135,10 @@
       </div>
       <!-- Filter werden erst mit JavaScript sichtbar; ohne JS sind alle Tiere lesbar. -->
       <div class="animal-filters" role="group" aria-label="Tierwelt filtern" hidden>
-        <button type="button" data-filter="alle" aria-pressed="true">Alle entdecken</button>
-        <button type="button" data-filter="pinguine" aria-pressed="false">Pinguine</button>
-        <button type="button" data-filter="robben" aria-pressed="false">Robben</button>
-        <button type="button" data-filter="krill" aria-pressed="false">Krill</button>
+        <button class="ice-button" type="button" data-filter="alle" aria-pressed="true">Alle entdecken</button>
+        <button class="ice-button" type="button" data-filter="pinguine" aria-pressed="false">Pinguine</button>
+        <button class="ice-button" type="button" data-filter="robben" aria-pressed="false">Robben</button>
+        <button class="ice-button" type="button" data-filter="krill" aria-pressed="false">Krill</button>
       </div>
       <p class="sr-only" id="filter-status" role="status" aria-live="polite"></p>
       <div class="animal-grid">
@@ -148,7 +148,7 @@
               <img src="frontend/bilder_tiere/pinguine.jpg"
                 alt="Zügelpinguine auf der Felsküste von Coronation Island"
                 width="3735" height="2801" loading="lazy">
-              <span class="image-tag">AN LAND & IM WASSER</span>
+              <span class="image-tag ice-label">AN LAND & IM WASSER</span>
             </div>
             <div class="animal-description">
               <h3 id="penguin-card-title">Pinguine <span aria-hidden="true">→</span></h3>
@@ -162,7 +162,7 @@
               <img src="frontend/bilder_tiere/robbe.jpg"
                 alt="Weddellrobbe schaut aus einem Atemloch im antarktischen Eis"
                 width="1816" height="1196" loading="lazy">
-              <span class="image-tag">ZWISCHEN EIS & MEER</span>
+              <span class="image-tag ice-label">ZWISCHEN EIS & MEER</span>
             </div>
             <div class="animal-description">
               <h3 id="seal-card-title">Robben <span aria-hidden="true">→</span></h3>
@@ -174,7 +174,7 @@
           <a class="animal-card-link" href="tierwelt.html#krill" aria-labelledby="krill-card-title">
             <div class="animal-image-wrap krill-image">
               <img src="frontend/bilder_tiere/krill.jpg" alt="Antarktischer Krill mit durchscheinendem Körper und großen dunklen Augen" width="4240" height="2893" loading="lazy">
-              <span class="image-tag">KLEIN & UNVERZICHTBAR</span>
+              <span class="image-tag ice-label">KLEIN & UNVERZICHTBAR</span>
             </div>
             <div class="animal-description">
               <h3 id="krill-card-title">Antarktischer Krill <span aria-hidden="true">→</span></h3>

@@ -1,12 +1,15 @@
 /* 01 — Designsystem: Farben, Abstände und Schriften zentral anpassen. */
 :root {
   --ink: #102f3d;
-  --muted: #526b75;
-  --ice: #f1f6f6;
-  --paper: #fafcfb;
-  --teal: #26665f;
-  --mint: #c4e4df;
-  --line: #d5e0e1;
+  --muted: #3e5866;
+  --ice: #e7f1f7;
+  --paper: #f6fafc;
+  --teal: #24536e;
+  --mint: #bfdeee;
+  --line: #bdd4e1;
+  --ice-texture: url('frontend/bilder_landschaft/eisdecke.png');
+  --frost-shadow: 0 12px 32px #214b6510, 0 2px 5px #214b650b;
+  --frost-panel: linear-gradient(115deg, #edf6fbe8, #f6fafcfa 32%, #f6fafcf5 72%, #d5e8f2e6);
   --page: 1264px;
   --gutter: clamp(22px, 5vw, 80px);
   --header-height: 88px;
@@ -25,10 +28,10 @@ p { line-height: 1.75; }
 h2 { font-size: clamp(32px, 3.3vw, 48px); line-height: 1.16; font-weight: 500; letter-spacing: -1.8px; }
 h3 { font-weight: 500; }
 [hidden] { display: none !important; }
-:focus-visible { outline: 3px solid #33867b; outline-offset: 6px; }
+:focus-visible { outline: 3px solid var(--teal); outline-offset: 6px; }
 .page-width { width: min(var(--page), calc(100% - var(--gutter) * 2)); margin-inline: auto; }
 .section-space { padding-block: 96px; }
-.eyebrow { font-size: 10px; font-weight: 600; letter-spacing: 2.5px; line-height: 1.6; }
+.eyebrow { font-size: 12px; font-weight: 700; letter-spacing: 1.8px; line-height: 1.65; }
 .section-label { color: var(--teal); margin-bottom: 23px; }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .skip-link { position: fixed; left: 20px; top: -100px; background: white; color: var(--ink); padding: 15px; z-index: 100; }
@@ -39,11 +42,16 @@ h3 { font-weight: 500; }
 .brand { display: inline-flex; gap: 12px; align-items: center; font-size: 18px; font-weight: 700; letter-spacing: 2.8px; text-decoration: none; white-space: nowrap; }
 .brand-icon { width: 37px; height: 32px; }
 .brand-dot { color: var(--teal); margin-left: -11px; }
-.navigation { display: flex; align-items: center; gap: 36px; height: 100%; }
-.navigation a { display: flex; align-items: center; height: 100%; position: relative; font-size: 12px; color: var(--muted); text-decoration: none; }
-.navigation a::after { content: ''; position: absolute; left: 0; right: 0; bottom: 23px; height: 2px; background: var(--teal); transform: scaleX(0); transition: transform .2s; }
-.navigation a:hover, .navigation a[aria-current] { color: var(--ink); }
-.navigation a:hover::after, .navigation a[aria-current]::after { transform: scaleX(1); }
+.navigation { display: flex; align-items: center; gap: 16px; height: 100%; }
+.navigation a { display: flex; align-items: center; justify-content: center; min-height: 44px; padding: 10px; position: relative; isolation: isolate; font-size: 12px; color: var(--muted); text-decoration: none; }
+/* Flache Eisflächen für Links; nur das Dekor wird an den Ecken beschnitten. */
+.navigation a::before { content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: linear-gradient(115deg, #e3f0f8ed, #f3f9fcf5 55%, #c8e0edeb), var(--ice-texture) center / cover; box-shadow: inset 0 0 0 1px #adcddd; clip-path: polygon(4px 0, 100% 0, 100% calc(100% - 4px), calc(100% - 4px) 100%, 0 100%, 0 4px); transition: filter .2s, box-shadow .2s; }
+.navigation a::after { content: ''; position: absolute; left: 10px; right: 10px; bottom: 3px; height: 1px; pointer-events: none; background: linear-gradient(90deg, #91bbd0, var(--teal), #91bbd0); opacity: .6; transition: opacity .2s, box-shadow .2s; }
+.navigation a:is(:hover, :focus-visible, [aria-current]) { color: var(--ink); }
+.navigation a:is(:hover, :focus-visible)::before { filter: brightness(1.04); box-shadow: inset 0 0 0 1px #78adc9, inset 0 0 12px #c3e7f9; }
+.navigation a:is(:hover, :focus-visible, [aria-current])::after { opacity: 1; }
+.navigation a[aria-current]::after { height: 3px; }
+.navigation a:is(:hover, :focus-visible)::after { box-shadow: 0 0 7px #70b4d6a6; }
 .header-coordinate { font-size: 12px; letter-spacing: 2px; display: flex; gap: 12px; align-items: center; white-space: nowrap; }
 .compass-icon { width: 29px; height: 29px; color: var(--teal); }
 .compass-icon, .compass-rose { fill: none; stroke: currentColor; stroke-width: 1.5; }
@@ -56,14 +64,13 @@ h3 { font-weight: 500; }
 .hero-image { object-position: center 55%; }
 .hero-shade { background: linear-gradient(90deg, rgba(8,30,43,.73), rgba(8,30,43,.22) 80%), linear-gradient(0deg, rgba(8,30,43,.60), transparent 36%); }
 .hero-content { position: relative; padding-bottom: 45px; }
-.hero .eyebrow { display: flex; align-items: center; gap: 15px; color: #e0efee; margin-bottom: 29px; }
-.tiny-line { height: 1px; width: 30px; background: var(--mint); }
+.hero .eyebrow { display: flex; align-items: center; gap: 15px; width: fit-content; max-width: 100%; padding: 10px 14px; font-size: 13px; letter-spacing: 1.5px; color: #f1f8fc; background: linear-gradient(90deg, #102f3de6, #102f3dbf); margin-bottom: 29px; }
+.tiny-line { height: 2px; width: 30px; flex-shrink: 0; background: var(--mint); }
 h1 { font-size: clamp(48px, 5.6vw, 82px); line-height: 1.07; letter-spacing: -3.7px; font-weight: 500; }
 h1 em { font-family: Georgia, 'Times New Roman', serif; font-weight: 400; letter-spacing: -3px; }
 .hero-description { font-size: 15px; margin-top: 26px; color: #e6eeee; }
 .button { display: inline-flex; align-items: center; justify-content: space-between; gap: 38px; padding: 18px 24px; font-size: 12px; font-weight: 600; text-decoration: none; transition: background .2s, transform .2s; }
-.button-light { color: var(--ink); background: var(--paper); margin-top: 34px; }
-.button-light:hover { background: var(--mint); transform: translateY(-2px); }
+.button-light { color: var(--ink); background: transparent; margin-top: 34px; }
 .button span { font-size: 20px; }
 .hero-bottom { position: absolute; bottom: 29px; left: 0; right: 0; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #ffffff40; padding-top: 23px; font-size: 9px; letter-spacing: 1.8px; }
 .hero-bottom > span:first-child { display: flex; align-items: center; gap: 9px; }
@@ -84,7 +91,7 @@ h1 em { font-family: Georgia, 'Times New Roman', serif; font-weight: 400; letter
 .facts .fact-note dd { font-size: 18px; letter-spacing: -.4px; line-height: 1.4; }
 .landscapes { background: var(--ice); }
 .section-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 40px; margin-bottom: 39px; }
-.section-heading > p { font-size: 12px; color: var(--muted); padding-bottom: 3px; }
+.section-heading > p { font-size: 15px; color: var(--ink); line-height: 1.7; max-width: 360px; padding: 4px 0 4px 16px; border-inline-start: 2px solid #91bbd0; }
 .landscape-grid { display: grid; grid-template-columns: 1.65fr 1fr; gap: 25px; }
 .landscape-feature { position: relative; min-height: 460px; overflow: hidden; background: #244a60; color: white; }
 .landscape-feature::after { content: ''; position: absolute; inset: 0; background: linear-gradient(0deg, #0c283bec, #102f3d00 90%); }
@@ -93,8 +100,8 @@ h1 em { font-family: Georgia, 'Times New Roman', serif; font-weight: 400; letter
 .image-caption .eyebrow { color: #c5e3e3; }
 .image-caption h3 { font-size: 30px; letter-spacing: -.8px; margin-top: 13px; }
 .image-caption p { font-size: 12px; color: #e6eeee; max-width: 440px; margin-top: 12px; }
-.landscape-note { padding: 36px; background: #e0ecea; position: relative; display: flex; flex-direction: column; align-items: flex-start; }
-.line-art { font-family: Georgia, serif; font-size: 64px; line-height: 1; color: #497d78; margin-bottom: 30px; }
+.landscape-note { padding: 36px; background: var(--ice); position: relative; display: flex; flex-direction: column; align-items: flex-start; }
+.line-art { font-family: Georgia, serif; font-size: 64px; line-height: 1; color: #487b97; margin-bottom: 30px; }
 .landscape-note .eyebrow { color: var(--teal); }
 .landscape-note h3 { font-size: 29px; letter-spacing: -.7px; line-height: 1.2; margin-top: 16px; }
 .landscape-note > p:not(.eyebrow) { font-size: 12px; color: #415e63; margin-top: 19px; }
@@ -105,9 +112,7 @@ h1 em { font-family: Georgia, 'Times New Roman', serif; font-weight: 400; letter
 
 /* 05 — Tierfilter: hidden entfernt Karten auch aus dem Accessibility-Baum. */
 .animal-filters { display: flex; gap: 8px; margin-bottom: 30px; }
-.animal-filters button { border: 1px solid var(--line); color: var(--muted); background: transparent; border-radius: 30px; padding: 11px 21px; font-size: 11px; min-height: 44px; }
-.animal-filters button[aria-pressed="true"] { background: var(--ink); color: white; border-color: var(--ink); }
-.animal-filters button:hover { border-color: var(--ink); }
+.animal-filters button { border: 1px solid transparent; color: var(--ink); background: transparent; border-radius: 0; padding: 11px 21px; font-size: 11px; min-height: 44px; }
 .animal-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 30px; }
 .animal-card-link { display: block; height: 100%; text-decoration: none; }
 .animal-card-link:hover h3, .animal-card-link:focus-visible h3 { color: var(--teal); }
@@ -115,8 +120,8 @@ h1 em { font-family: Georgia, 'Times New Roman', serif; font-weight: 400; letter
 .animal-image-wrap { position: relative; overflow: hidden; background: var(--ice); }
 .animal-image-wrap img { width: 100%; height: 255px; transition: transform .5s; }
 .animal-card:hover img { transform: scale(1.025); }
-.image-tag { position: absolute; bottom: 18px; left: 20px; padding: 9px 12px; background: var(--paper); color: var(--ink); font-size: 8px; letter-spacing: 1.4px; }
-.animal-description { padding-top: 23px; }
+.image-tag { position: absolute; bottom: 18px; left: 20px; max-width: calc(100% - 40px); padding: 12px 16px; color: var(--ink); font-size: 10px; font-weight: 600; line-height: 1.5; letter-spacing: 1px; }
+.animal-description { padding: 23px 20px 26px; }
 .animal-description h3 { display: flex; justify-content: space-between; gap: 12px; font-size: 24px; letter-spacing: -.5px; }
 .animal-description h3 span { font-size: 20px; color: var(--teal); }
 .animal-description p { font-size: 12px; color: var(--muted); margin-top: 13px; max-width: 460px; }
@@ -172,8 +177,8 @@ h1 em { font-family: Georgia, 'Times New Roman', serif; font-weight: 400; letter
 .wildlife-intro { padding-block: 70px 46px; }
 .wildlife-intro h1 { font-size: clamp(40px, 5vw, 68px); letter-spacing: -2px; max-width: 900px; }
 .wildlife-intro > p:not(.eyebrow) { color: var(--muted); max-width: 680px; font-size: 15px; margin-top: 25px; }
-.species-navigation { display: flex; flex-wrap: wrap; gap: 14px 28px; margin-top: 30px; }
-.species-navigation a { font-size: 13px; padding-block: 10px; }
+.species-navigation { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+.species-navigation a { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; max-width: 100%; font-size: 13px; font-weight: 600; padding: 13px 22px; color: var(--ink); text-decoration: none; }
 .species-section { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 60px; padding-block: 64px; border-top: 1px solid var(--line); }
 .species-photo { margin: 0; }
 .species-photo img { width: 100%; height: auto; aspect-ratio: 4 / 3; }
@@ -193,11 +198,166 @@ h1 em { font-family: Georgia, 'Times New Roman', serif; font-weight: 400; letter
 .food-chain small { display: block; font-size: 12px; line-height: 1.6; margin-top: 8px; color: var(--muted); }
 .food-chain > span { color: var(--teal); font-size: 25px; }
 
+/* Gemeinsame Eisoberfläche: vorhandene Textur wiederverwenden, Schriftflächen
+   mit hellen bzw. dunklen Farbschichten beruhigen. Kein fixierter Hintergrund,
+   kein zusätzlicher Scroll-Effekt und keine Dekoration über Bedienelementen. */
+body:not(.opening-page) {
+  background-color: var(--paper);
+  background-image: linear-gradient(90deg, #e4f0f8d9, #f6fafcf5 18%, #f6fafcf5 82%, #e4f0f8d9), var(--ice-texture);
+  background-size: auto, 1600px auto;
+}
+.site-header {
+  background: linear-gradient(105deg, #e4f0f8ed, #f6fafcfa 35%, #f6fafcf5 75%, #d5e8f2e6), var(--ice-texture) center / cover;
+  box-shadow: 0 3px 15px #173e5110;
+}
+.landscapes {
+  background: linear-gradient(110deg, #c9dfede6, #e7f1f7f5 28%, #edf5f9f5 72%, #c9dfede6), var(--ice-texture) center / cover;
+}
+.landscape-note, .animal-card-link, .ecosystem, .food-chain > div {
+  background: var(--frost-panel), var(--ice-texture) center / cover;
+  box-shadow: inset 0 0 0 1px #b7d2e2, inset 0 2px 0 #e3f3fc, var(--frost-shadow);
+}
+/* Nur die dekorativen Flächen erhalten Bruchkanten. Inhalte und Fokusrahmen
+   werden nicht beschnitten; auch lange Texte dürfen die Karten vergrößern. */
+.landscape-note, .ecosystem { isolation: isolate; }
+.ecosystem { position: relative; }
+.landscape-note::before, .landscape-note::after,
+.ecosystem::before, .ecosystem::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(135deg, #a6cce09c, #dceef862 48%, #92bdd48c);
+  clip-path: polygon(0 0, 36% 0, 13% 3px, 3px 16%, 0 36%);
+}
+.landscape-note::after, .ecosystem::after { transform: rotate(180deg); }
+.animal-card-link { transition: box-shadow .2s; }
+.animal-card-link:hover, .animal-card-link:focus-visible {
+  box-shadow: inset 0 0 0 1px #8db8cf, inset 0 2px 0 #e3f3fc, 0 12px 30px #214b651c;
+}
+.animal-image-wrap, .species-photo img {
+  clip-path: polygon(9px 0, 100% 0, 100% calc(100% - 9px), calc(100% - 9px) 100%, 0 100%, 0 9px);
+}
+.landscape-feature { box-shadow: var(--frost-shadow); }
+.food-chain > div { border-top-color: #83b3cd; }
+.knowledge {
+  background: linear-gradient(110deg, #173e53ed, #102f3dfa 28%, #102f3dfa 72%, #173e53ed), var(--ice-texture) center / cover;
+}
+.hero :focus-visible, .knowledge :focus-visible { outline-color: var(--mint); }
+.questions details, .questions details:last-child, .polar-guide,
+.polar-comparison th, .polar-comparison td { border-color: #406175; }
+.polar-comparison tbody tr:nth-child(odd) { background: #b4d7eb06; }
+.compass-rose { filter: drop-shadow(0 0 12px #8ac5e526); }
+.site-footer {
+  background: linear-gradient(110deg, #e2eef6ed, #f6fafcf7 40%, #e2eef6ed), var(--ice-texture) center / cover;
+}
+/* Flache, unregelmäßige Eissäume liegen innerhalb der freien Abschnittsränder. */
+.landscapes, .knowledge { position: relative; }
+.landscapes::before, .knowledge::before, .knowledge::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 12px;
+  pointer-events: none;
+  background: linear-gradient(90deg, #92bdd4b3, #cbe2efad 45%, #92bdd4b3);
+  clip-path: polygon(0 0, 100% 0, 100% 30%, 88% 56%, 76% 25%, 63% 66%, 49% 34%, 34% 80%, 18% 40%, 7% 70%, 0 45%);
+}
+.landscapes::before, .knowledge::before { top: 0; }
+.knowledge::after { bottom: 0; transform: rotate(180deg); }
+
+/* Überschriften bleiben Text: Farbe und kurze Eiskante ordnen die Inhalte,
+   ohne den Titel wie ein weiteres Bedienelement einzurahmen. */
+:is(.intro, .section-heading, .species-copy, .ecosystem, .closing) h2,
+.wildlife-intro h1 { color: #1d506b; }
+:is(.landscape-note, .animal-description, .species-copy) h3 { color: var(--teal); }
+.hero h1 em { color: #d9eef8; }
+.knowledge h2, .knowledge h3 { color: #e3f2fa; }
+:is(.intro, .section-heading, .species-copy, .ecosystem) h2::after,
+.wildlife-intro h1::after, .knowledge h2::after {
+  content: '';
+  display: block;
+  width: 64px;
+  height: 4px;
+  margin-top: 18px;
+  background: linear-gradient(90deg, #5f94b2, #b5d6e7);
+  clip-path: polygon(0 0, 77% 0, 100% 35%, 87% 75%, 33% 100%, 0 65%);
+  pointer-events: none;
+}
+.knowledge h2::after { background: linear-gradient(90deg, #91bfd8, #d3e9f4); }
+/* Wenige erklärende Flächen erhalten eine Seitenkante. Die native Struktur
+   von Absätzen, Überschriften und Wissensfragen bleibt unverändert. */
+.intro-detail, .species-copy > h3 + p {
+  border-inline-start: 2px solid #8db7cd;
+  padding-inline: 18px 12px;
+  background: linear-gradient(90deg, #deedf67a, #f6fafc00 85%);
+}
+.polar-explanation > div {
+  border-inline-start: 2px solid #7daac3;
+  padding-inline-start: 22px;
+  background: linear-gradient(90deg, #bedff00b, transparent 85%);
+}
+.facts dd { color: #1d506b; }
+
+/* Eisbuttons: Dekor liegt hinter dem Text und verändert keine Abstände.
+   Die SVG-Maske beschränkt den Lichtreflex auf die Innenränder. */
+.ice-button { position: relative; isolation: isolate; }
+/* Bildlabels teilen nur das Material: keine eigene Aktion und kein Tabstopp.
+   Ihre absolute Position kommt weiterhin von .image-tag. */
+.ice-label { isolation: isolate; }
+.ice-button::before, .ice-label::before { content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: radial-gradient(ellipse, #dfedf3eb 30%, #dfedf300 74%), url('frontend/bilder_landschaft/eisdecke.png') center / cover; clip-path: polygon(2% 5%, 12% 2%, 36% 5%, 54% 2%, 72% 6%, 98% 2%, 100% 20%, 98% 47%, 100% 63%, 98% 96%, 78% 94%, 60% 99%, 36% 94%, 2% 98%, 0 73%, 2% 47%, 0 26%); }
+.ice-decorated:is(.ice-button, .ice-label)::before { display: none; }
+.ice-button-art { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; overflow: visible; pointer-events: none; filter: drop-shadow(0 2px 1px #12384e1c); }
+.ice-ui-base { fill: #8ebbcf; stroke: #6399b1; stroke-width: .6; }
+.ice-ui-tint { opacity: .15; }
+.ice-ui-selected { opacity: 0; transition: opacity .15s; }
+.ice-button[aria-pressed="true"] .ice-ui-selected,
+.ice-button[aria-expanded="true"] .ice-ui-selected { opacity: 1; }
+.ice-ui-inner-edge { fill: none; stroke: #a6ccdf; stroke-width: 1; opacity: .6; }
+.ice-ui-lit-edge { fill: none; stroke: #b9deee; stroke-width: 1.8; opacity: 0; transition: opacity .22s; }
+.ice-tone-light, .ice-tone-quiet { stop-color: #dfedf3; }
+.ice-tone-mid { stop-color: #cce2ec; }
+.ice-tone-blue { stop-color: #a9cedf; }
+.ice-tone-beam { stop-color: #b7ddeb; }
+.ice-tone-beam-center { stop-color: #cbe8f4; }
+.ice-button:is(:hover, :focus-visible, .ice-lit) .ice-ui-lit-edge { opacity: .9; }
+.ice-button:is(:hover, :focus-visible, .ice-lit) .ice-ui-glint { animation: ice-edge-light .85s ease-out both; }
+@keyframes ice-edge-light { from { transform: translateX(0); } to { transform: translateX(260%); } }
+
+/* Optionaler Eis-Einstieg: vier Schollen mit gemeinsamer lokaler Textur.
+   Die passgenauen SVG-Bruchkanten werden in opening.html gepflegt. */
+.opening-page { background: #d8edf3; }
+.opening-stage { position: relative; height: 100svh; overflow: hidden; isolation: isolate; }
+.opening-destination, .ice-surface { position: absolute; inset: 0; width: 100%; height: 100%; }
+.opening-destination { background: #2b4a5a url('frontend/bilder_landschaft/hero-antarktis.jpg') center / cover; pointer-events: none; }
+.opening-destination iframe { display: block; border: 0; width: 100%; height: 100%; }
+.ice-surface { z-index: 1; overflow: visible; transition: opacity .12s ease-out; }
+.ice-plate { stroke: #28596e; stroke-width: 8; stroke-linejoin: round; }
+.ice-edge { fill: none; stroke: #effcff; stroke-width: 3; stroke-linejoin: bevel; transform: translateY(-4px); opacity: .85; }
+.ice-hairline { fill: none; stroke: #427c91; stroke-width: 1.5; opacity: .38; }
+.ice-slab { transform-box: view-box; transform-origin: center; transition: transform 1.05s cubic-bezier(.55, .02, .25, 1) .08s; }
+.opening-brand { position: absolute; z-index: 2; top: 9%; left: 0; width: 100%; text-align: center; text-transform: uppercase; font-size: clamp(16px, 2vw, 23px); font-weight: 500; letter-spacing: .38em; padding-left: .38em; line-height: 1.5; color: #153b50; text-shadow: 0 1px 14px #fff; }
+.ice-trigger { position: absolute; z-index: 3; top: 49%; left: 50%; transform: translate(-50%, -45%); width: min(540px, 88%); height: min(310px, 46%); display: flex; align-items: flex-end; justify-content: center; padding-bottom: 24px; text-decoration: none; color: #12384e; }
+.ice-trigger span { font-family: Georgia, 'Times New Roman', serif; font-size: clamp(25px, 3vw, 40px); line-height: 1.2; text-align: center; text-shadow: 0 1px 15px #fff, 0 0 30px #f0fbff; transition: transform .2s, color .2s; }
+.ice-trigger:hover span { transform: translateY(-3px); color: #071f30; }
+.ice-trigger:focus-visible { outline: 2px solid #153b50; outline-offset: 8px; background: #f5fcff24; }
+.opening-brand, .ice-trigger { transition: opacity .18s ease-out; }
+.is-opening .opening-brand, .is-opening .ice-trigger { opacity: 0; }
+.is-opening .ice-slab-top { transform: translateY(-105%); }
+.is-opening .ice-slab-right { transform: translateX(105%); }
+.is-opening .ice-slab-bottom { transform: translateY(105%); }
+.is-opening .ice-slab-left { transform: translateX(-105%); }
+@media (prefers-reduced-motion: reduce) {
+  .is-opening .ice-surface { opacity: 0; }
+  .is-opening .ice-slab { transform: none; }
+}
+
 /* 07 — Responsive Layout, ohne separate mobile Inhalte. */
 @media (min-width: 1600px) { .site-header { padding-inline: max(var(--gutter), calc((100vw - var(--page)) / 2)); } }
 @media (max-width: 1000px) {
   .header-coordinate { display: none; }
-  .navigation { gap: 25px; }
+  .navigation { gap: 5px; }
   .hero { min-height: 620px; }
   .intro { gap: 45px; }
   .facts > div { padding-inline: 20px; }
@@ -217,16 +377,15 @@ h1 em { font-family: Georgia, 'Times New Roman', serif; font-weight: 400; letter
   .brand { font-size: 15px; gap: 10px; letter-spacing: 2px; }
   .brand-icon { width: 30px; height: 26px; }
   .brand-dot { margin-left: -9px; }
-  .js .menu-toggle { display: inline-flex; align-items: center; gap: 12px; background: transparent; border: 1px solid var(--line); padding: 10px 12px; font-size: 11px; min-height: 44px; margin-block: -8px; color: var(--ink); }
-  .navigation { width: 100%; height: auto; justify-content: space-between; gap: 12px; padding-block: 14px 4px; }
+  .js .menu-toggle { display: inline-flex; align-items: center; gap: 12px; background: transparent; border: 1px solid transparent; padding: 10px 12px; font-size: 11px; min-height: 44px; margin-block: -8px; color: var(--ink); }
+  .navigation { width: 100%; height: auto; justify-content: flex-start; flex-wrap: wrap; gap: 6px; padding-block: 14px 4px; }
   .js .navigation { display: none; }
   .js .navigation.is-open { display: flex; }
-  .navigation a { font-size: 11px; min-height: 36px; }
-  .navigation a::after { bottom: 0; }
+  .navigation a { flex: 1 0 auto; font-size: 11px; min-height: 44px; padding-inline: 8px; }
   .hero { min-height: 620px; height: calc(92svh - var(--header-height)); max-height: 780px; }
   h1 { font-size: clamp(43px, 8vw, 62px); letter-spacing: -2px; }
   h1 em { letter-spacing: -2px; }
-  .hero .eyebrow { font-size: 8px; letter-spacing: 1.8px; gap: 10px; margin-bottom: 25px; }
+  .hero .eyebrow { font-size: 12px; letter-spacing: 1px; gap: 10px; margin-bottom: 25px; }
   .tiny-line { width: 20px; }
   .hero-description { font-size: 13px; max-width: 350px; }
   .hero-content { padding-bottom: 30px; }
@@ -273,4 +432,6 @@ h1 em { font-family: Georgia, 'Times New Roman', serif; font-weight: 400; letter
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition: none !important; animation: none !important; }
+  /* Ruhige Blende ohne Verschieben der Eisflächen. */
+  .opening-page .ice-surface { transition: opacity .12s ease-out !important; }
 }
